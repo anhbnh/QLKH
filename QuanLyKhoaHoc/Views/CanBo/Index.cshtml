@@ -1,0 +1,37 @@
+﻿@model QuanLyKhoaHoc.Models.khCanBo
+
+@{
+    ViewBag.Title = "Hồ sơ cán bộ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <div class="row" style="margin-bottom:20px; font-size:20px; ">
+        <a href="#">
+            <span class="s-icon" style="font-size:22px; color:green; "><i class="ti-plus"></i></span>
+            <span class="s-text">Thêm cán bộ</span>
+        </a>
+        |
+        <a href="#">
+            <span class="s-icon" style="font-size:22px;"><i class="ti-export"></i></span>
+            <span class="s-text">Xuất Excel</span>
+        </a>
+
+    </div>
+    <div class="row">
+        <div class="col col-lg-3 col-md-3">
+            @{Html.RenderAction("DanhSachDonViQuanLy", "DonViQuanLy");}
+        </div>
+
+        <div class="col col-lg-9 col-md-9">
+            <h2>Hồ sơ cán bộ</h2>
+            <div class="row" id="divData">
+                @{
+                    Html.RenderAction("LoadData");
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

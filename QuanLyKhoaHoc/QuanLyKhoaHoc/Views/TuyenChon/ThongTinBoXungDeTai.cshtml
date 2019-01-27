@@ -1,0 +1,187 @@
+﻿@model QuanLyKhoaHoc.Models.khDeTaiChiTiet
+
+@{
+    ViewBag.Title = "ThongTinBoXungDeTai";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css
+{
+    <style type="text/css">
+    </style>
+}
+
+@section Header{
+    Thông tin bổ xung
+}
+@section TopMenu
+{
+    <button class="btn-link" style="color:green;" id="btnSearch"><i class="glyphicon glyphicon-save"></i>Lưu</button>
+    <button class="btn-link" style="color:red;" id="btnAdd"><i class="glyphicon glyphicon-ban-circle"></i>Hủy</button>
+}
+
+<div class="form-horizontal">
+    <input type="hidden" id="txtIdDeTai" value="@Model.ID_de_tai" />
+    <div class="row">
+        <div class="col-md-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Số đăng kí</span>
+        </div>        
+        <div class="col-md-2">
+            <div style="padding-right:0px;">
+                <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtSoDangKi"/>
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Ngày đăng kí:</span>
+        </div>
+        <div class="col-md-2">
+            <div style="padding-right:0px;">
+                <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtNgayDangKi" type="date" value="@Model.Ngay_dang_ky.Value.ToString("yyyy-MM-dd")"/>
+            </div>
+        </div>
+        <div class="col-md-3">           
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"> 
+            <span style="font-size:13px; padding-right:0px;">Tình hình nghiên cứu:</span>
+        </div>
+        <div class="col-md-5"> 
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Ngoài nước:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtNgoaiNuoc"></textarea>
+            </div>
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Danh mục công trình:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtDMcongTrinh"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Trong nước:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtTrongNuoc"></textarea>
+            </div>
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Luận giải:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtLuanGiai"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>Cách tiếp cận, phương pháp nghiên cứu, kỹ thuật sẽ sử dụng</div>
+        <div class="row">
+            <div class="col-md-2"> </div>
+            <div class="col-md-10">
+                <div style="padding-right:0px;">
+                    <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="3" id="txtCachTiepCan"></textarea>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <span style="font-size:13px; padding-right:0px;">Nội dung nghiên cứu:</span>
+        </div>
+        <div class="col-md-5">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Nội dung 1:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtNoiDung1"></textarea>
+            </div>
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Nội dung 3:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtNoiDung3"></textarea>
+            </div>
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Nội dung 5:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtNoiDung5"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Nội dung 2:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtNoiDung2"></textarea>
+            </div>
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Nội dung 4:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtNoiDung4"></textarea>
+            </div>
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Nội dung 6:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtNoiDung6"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <span class="control-label col-md-2" style="font-size:13px; padding-right:0px; text-align:left;">Các hoạt động:</span>
+        <div class="col-md-10">
+            <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtCacHoatDong"></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <span style="font-size:13px; padding-right:0px;">Hợp tác quốc tế:</span>
+        </div>
+        <div class="col-md-5">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Đã hợp tác:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtDaHopTac"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Dự kiến hợp tác:</span>
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" id="txtDuKienHopTac"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <span style="font-size:13px; padding-right:0px;">File 1:</span>
+        </div>
+        <div class="col-md-4">           
+            <div style="padding-right:0px;">
+                <input class="form-control" type="file" style="padding: 5px;" id="txtFile1" />
+            </div>
+        </div>
+        <div class="col-md-1">
+            <span style="font-size:13px; padding-right:0px;">File 2:</span>
+        </div>
+        <div class="col-md-4">
+            <div style="padding-right:0px;">
+                <input class="form-control" type="file" style="padding: 5px;" id="txtFile2" />
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <span style="font-size:13px; padding-right:0px;">File 3:</span>
+        </div>
+        <div class="col-md-4">
+            <div style="padding-right:0px;">
+                <input class="form-control" type="file" style="padding: 5px;" id="txtFile3"/>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <span style="font-size:13px; padding-right:0px;">File 4:</span>
+        </div>
+        <div class="col-md-4">
+            <div style="padding-right:0px;">
+                <input class="form-control" type="file" style="padding: 5px;" id="txtFile4" />
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+</div>

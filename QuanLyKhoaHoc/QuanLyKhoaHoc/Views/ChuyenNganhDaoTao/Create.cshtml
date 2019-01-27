@@ -1,0 +1,47 @@
+﻿@model QuanLyKhoaHoc.Models.dmChuyenNganhDaoTao
+<div class="form-horizontal">
+    <h4>CẬP NHẬT CHUYÊN NGÀNH ĐÀO TẠO</h4>
+    <hr />
+
+    <input type="hidden" id="idChuyenNganh" />
+
+    <div class="row">
+        <div class="form-group">
+            <span class="control-label col-md-2">Ngành đào tạo</span>
+            <div class="col-md-10">
+                @{
+                    Html.RenderAction("RenderPartial", "Nganh");
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <span class="control-label col-md-2">Mã chuyên ngành</span>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ma_chuyen_nganh, new { htmlAttributes = new { @class = "form-control", @id = "txtMaChuyenNganh" } })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <span class="control-label col-md-2">Tên chuyên ngành</span>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Chuyen_nganh, new { htmlAttributes = new { @class = "form-control", @id = "txtTenChuyenNganh" } })
+                @Html.ValidationMessageFor(model => model.Chuyen_nganh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <span class="control-label col-md-2">Tên tiếng anh</span>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Chuyen_nganh_en, new { htmlAttributes = new { @class = "form-control", @id = "txtTenChuyenNganhEn", @text = "Tên tiếng anh" } })
+            </div>
+        </div>
+
+
+    </div>
+</div>

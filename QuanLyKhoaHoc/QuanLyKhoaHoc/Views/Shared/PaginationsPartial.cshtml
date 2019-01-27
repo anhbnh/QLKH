@@ -1,0 +1,15 @@
+﻿
+<ul class="pagination pagination-sm text-center" id="ul_Page">
+    <li class="page-item">
+        <a class="btn btn-default" href="javascript:void(0)"><<</a>
+    </li>
+    <li class="page-item active"><span class="page-link"><a href="javascript:void(0)">1</a><span class="sr-only"></span></span></li>
+    @for (int i = 1; i < Model; i++)
+    {
+        <li class="page-item"><span class="page-link"><a href="javascript:void(0)">@(i + 1)</a><span class="sr-only"></span></span></li>
+    }
+    <li class="page-item">
+        <a class="btn btn-default" href="javascript:void(0)" onclick="maxPage(@Model)">>></a>
+    </li>
+</ul>
+

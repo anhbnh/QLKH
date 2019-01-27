@@ -1,0 +1,38 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.dmLoaiDeTai>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Mã loại đề tài
+        </th>
+        <th>
+            Loại đề tài
+        </th>
+        <th>
+            ID cấp quản lí
+        </th>
+        <th width="150" style="text-align:center">Hành động</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ma_loai_de_tai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Loai_dt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_cap_quan_ly)
+        </td>
+        <td width="150" style="text-align:center;">
+
+            <a href="javascript:void(0)" style="color:blue; margin-right:20px;" data-toggle="tooltip" title='Sửa' onclick="alter('Sửa')"> <i class="glyphicon glyphicon-pencil"></i></a>  @*></a>*@
+
+            <a href="javascript:void(0)" style="color:red" data-toggle="tooltip" title='Xóa' onclick="alter('Xóa')"><i class="glyphicon glyphicon-remove"></i></a>
+        </td>
+    </tr>
+}
+
+</table>

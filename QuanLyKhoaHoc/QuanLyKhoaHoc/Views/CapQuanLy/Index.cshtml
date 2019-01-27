@@ -1,0 +1,92 @@
+﻿@model QuanLyKhoaHoc.Models.khCapQuanLy
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cấp quản lý</h2>
+
+<div class="row">
+    <button class="btn btn-primary col-lg-offset-1" id="btnCreate">Thêm mới</button>
+
+</div>
+
+<div id="divData">
+    @{
+        Html.RenderAction("LoadData");
+    }
+</div>
+
+<div>
+    @Html.Action("RenderPaginations")
+</div>
+
+
+
+@section Scripts{
+    <script>
+
+        var id = -1;
+
+        var pageIndex = 1;
+        var max = 1;
+
+        $('.pagination li').on('click', function () {
+            debugger;
+            var $this = $(this);
+            var str = $this.text().trim();
+            var str1 = '<<';
+            var str2 = '>>';
+            if (str == str1) {
+                if (pageIndex > 1) {
+                    pageIndex = parseInt(pageIndex) - 1;
+                    var url = '/CapQuanLy/LoadData?page=' + pageIndex;
+                    $('#divData').load(url);
+
+                    $('.pagination li').removeClass('active');
+                    if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+                        $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+                    }
+                }
+                else pageIndex = 1;
+            }
+            else if (str == str2) {
+                if (pageIndex < max) {
+                    pageIndex = parseInt(pageIndex) + 1;
+                    var url = '/CapQuanLy/LoadData?page=' + pageIndex;
+                    $('#divData').load(url);
+
+
+                    $('.pagination li').removeClass('active');
+                    if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+                        $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+                    }
+                }
+                else
+                    pageIndex = max;
+            }
+            else {
+                pageIndex = $this.text();
+                var url = '/CapQuanLy/LoadData?page=' + pageIndex;
+                $('#divData').load(url);
+
+                $('.pagination li').removeClass('active');
+                if (!$this.hasClass('active')) {
+                    $this.addClass('active');
+                }
+            }
+
+
+
+        });
+
+        function maxPage(mp) {
+            debugger;
+            max = mp;
+        }
+
+
+    </script>
+}
+

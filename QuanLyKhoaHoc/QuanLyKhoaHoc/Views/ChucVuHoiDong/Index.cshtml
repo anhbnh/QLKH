@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Chức vụ hội đồng</h2>
+<div class="row">
+    <button class="btn btn-primary col-lg-offset-1" id="btnCreate">Thêm mới</button>
+
+</div>
+
+<div id="divData">
+    @{
+        Html.RenderAction("LoadData");
+    }
+</div>
+
+<div>
+    @Html.Action("RenderPaginations")
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalCreate">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cập nhật</h4>
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("/Views/ChuyenNganhDaoTao/Create.cshtml");
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnLuu">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+
+        var id = -1;
+
+        var pageIndex = 1;
+        var max = 1;
+
+        $('.pagination li').on('click', function () {
+            debugger;
+            var $this = $(this);
+            var str = $this.text().trim();
+            var str1 = '<<';
+            var str2 = '>>';
+            if (str == str1) {
+                if (pageIndex > 1) {
+                    pageIndex = parseInt(pageIndex) - 1;
+                    var url = '/ChucVuHoiDong/LoadData?page=' + pageIndex;
+                    $('#divData').load(url);
+
+                    $('.pagination li').removeClass('active');
+                    if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+                        $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+                    }
+                }
+                else pageIndex = 1;
+            }
+            else if (str == str2) {
+                if (pageIndex < max) {
+                    pageIndex = parseInt(pageIndex) + 1;
+                    var url = '/ChucVuHoiDong/LoadData?page=' + pageIndex;
+                    $('#divData').load(url);
+
+
+                    $('.pagination li').removeClass('active');
+                    if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+                        $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+                    }
+                }
+                else
+                    pageIndex = max;
+            }
+            else {
+                pageIndex = $this.text();
+                var url = '/ChucVuHoiDong/LoadData?page=' + pageIndex;
+                $('#divData').load(url);
+
+                $('.pagination li').removeClass('active');
+                if (!$this.hasClass('active')) {
+                    $this.addClass('active');
+                }
+            }
+
+
+
+        });
+
+        function maxPage(mp) {
+            debugger;
+            max = mp;
+        }
+
+        $('#btnCreate').click(function () {
+            id = -1;
+            $('#modalCreate').modal('show');
+        });
+
+        function ShowModalDetail(ID_chuc_vu_hd,Ma_chuc_vu, Chuc_vu, He_so_xet_chon, He_so_co_so, He_so_chinh_thuc, He_so_tham_dinh) {
+            debugger;
+
+            id = ID_chuyen_nganh;
+            $('#idChuyenNganh').val(id);
+            $('#txtMaChuyenNganh').val(Ma_chuyen_nganh);
+            $('#txtTenChuyenNganh').val(Chuyen_nganh);
+            $('#selectNganh').val(ID_nganh);
+            // $('#selectNganh option:selected').val(ID_nganh)
+            $('#txtTenChuyenNganhEn').val(Chuyen_nganh_en);
+            $('#modalCreate').modal('show');
+        }
+
+
+        $('#btnLuu').click(function () {
+            debugger;
+            var chuyennganh = {};
+            // id = $('#idChuyenNganh').val();
+            chuyennganh.ID_chuyen_nganh = id;
+            chuyennganh.Ma_chuyen_nganh = $('#txtMaChuyenNganh').val();
+            chuyennganh.Chuyen_nganh = $('#txtTenChuyenNganh').val();
+            chuyennganh.ID_nganh = $('#selectNganh option:selected').val()
+            chuyennganh.Chuyen_nganh_en = $('#txtTenChuyenNganhEn').val();
+            chuyennganh.Ky_thuat = 1;
+            var urlAction = id == -1 ? "/ChuyenNganhDaoTao/Create1" : "../ChuyenNganhDaoTao/Update";
+            $.ajax({
+                type: 'POST',
+                url: urlAction,
+                data: JSON.stringify({ chuyennganhdaotao: chuyennganh }),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result == "True") {
+                        // toastr.success('Lưu thành công');
+                    }
+                    else {
+                        //  toastr.error('Thất bại');
+                    }
+                    $('#divData').load('/ChuyenNganhDaoTao/LoadData');
+                    // $('#dvPager').load('/Administrator/QuanLyNguoiDung/LoadPage');
+                    $('#modalCreate').modal('hide');
+                },
+                error: function () {
+                    // toastr.error('Thất bại');
+                }
+            });
+        });
+
+        function ShowModalDelete(ID_cn) {
+
+            if (confirm("Bạn có muốn xóa chuyên ngành này ?") == true) {
+                var urlAction = "/ChuyenNganhDaoTao/Delete";
+                $.ajax({
+                    type: "POST",
+                    url: urlAction,
+                    data: JSON.stringify({ ID_chuyen_nganh: ID_cn }),
+                    contentType: 'application/json',
+                    success: function (result) {
+                        if (result == "True") {
+
+                            //    toastr.success('Lưu thành công');
+                        }
+                        else {
+                            //   toastr.error('Thất bại');
+                        }
+
+                        $('#divData').load('/ChuyenNganhDaoTao/LoadData');
+                    },
+                    error: function () {
+                        //  toastr.error('Thất bại');
+                    }
+                });
+            }
+        }
+
+
+
+    </script>
+}

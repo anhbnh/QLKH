@@ -1,0 +1,588 @@
+﻿@model QuanLyKhoaHoc.Models.khDeTai
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    Thêm mới đề tài
+}
+@section TopMenu
+{
+    <button class="btn-link" style="color:green;" id="btnSearch"><i class="glyphicon glyphicon-save"></i>Lưu</button>
+    <button class="btn-link" style="color:red;" id="btnAdd"><i class="glyphicon glyphicon-ban-circle"></i>Hủy</button>
+}
+
+<div class="form-horizontal">
+    <input type="hidden" id="txtIdDeTai" value="-1" />
+    <div class="row">
+        <div class="form-group col-md-6">
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Mã đề tài:</span>
+                <div class="col-md-2" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtMaDeTai" />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Tên đề tài:</span>
+                <div class="col-md-5" style="padding-right:5px; padding-left:0px; ">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtTenDeTai" />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Năm:</span>
+                <div class="col-md-9" style="padding-right:5px;  ">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="number" value="@DateTime.Now.Year" id="txtNamDangKy" />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Loại hình nghiên cứu:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    @{Html.RenderAction("SelectLoaiHinhNghienCuu", "LoaiHinhNghienCuu");}
+                </div>
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Lĩnh vực khoa học:</span>
+                <div class="col-md-3" style="padding-right:5px; padding-left:5px; ">
+                    @{Html.RenderAction("SelectLinhVucNghienCuu", "LinhVucNghienCuu");}
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Cơ quan chủ quản:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    @{Html.RenderAction("SelectCoQuanChuQuan", "CoQuanChuQuan");}
+                </div>
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Đơn vị chủ trì:</span>
+                <div class="col-md-3" style="padding:0px 5px 0px 5px;">
+                    @{Html.RenderAction("SelectDonViChuTri", "DonViChuTri");}
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Số tiền:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="number" id="txtSoTien" value="0" max="9999999999"/>
+                </div>
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Thực hiện từ ngày:</span>
+                <div class="col-md-3" style="padding:0px 5px 0px 5px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="date" id="txtTuNgay" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Mục tiêu:</span>
+                <div class="col-md-9" style="padding-right:5px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtMucTieu" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6" style="padding-right:0px;">
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Tên tiếng anh:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtTenTiengAnh" placeholder="Tên tiếng anh" />
+                </div>
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Tình trạng ĐT:</span>
+                <div class="col-md-3">
+                    @{Html.RenderAction("SelectTinhTrangDeTai", "TinhTrangDeTai");}
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Cấp quản lí:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    @{Html.RenderAction("SelectCapQuanLy", "CapQuanLy");}
+                </div>
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Thuộc đề tài:</span>
+                <div class="col-md-3">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">GV hướng dẫn:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" />
+                </div>
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Số học trình:</span>
+                <div class="col-md-3">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="number" value="0" id="txtSoHocTrinh" />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Đơn vị phối hợp:</span>
+                <div class="col-md-9">
+                    @{Html.RenderAction("SelectDonViPhoiHop", "DonViPhoiHop");}
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Đến ngày:</span>
+                <div class="col-md-3" style="padding-right:0px; ">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" id="txtNgayKetThuc" />
+                </div>
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Đề tài kế hoạch:</span>
+                <div class="col-md-3">
+                    <label class="checkbox-inline"><input type="checkbox" name="txtDeTaiKeHoach" id="txtDeTaiKeHoach" value="">Đề tài kế hoạch</label>
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Dư kiến ứng dụng:</span>
+                <div class="col-md-9">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtDuKienUngDung" placeholder="Dự kiến ứng dung" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <input type="hidden" id="txtIdChuNhiem" value="-1" />
+            <div style="margin-left:15px;">Thông tin về cán bộ chủ nhiệm đề tài</div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Mã/Họ tên:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="" id="txtmaChuNhiem">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="btnMaChuNhiem" data-toggle="modal" data-target="#myModal" onclick="showmodal(1)"><i class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Họ tên:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtTenChuNhiem" placeholder="họ tên chủ nhiệm" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Học hàm/Học vị:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtHochamChuNhiem" disabled />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Email:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtEmailChuNhiem" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Ngày sinh:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtNgaySinhChuNhiem" disabled />
+                </div>
+                <div class="control-label col-md-6" style="font-size:13px; padding-right:0px;"></div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Điện thoại:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtSDTChuNhiem" disabled />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Di động:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtDiDOngChuNhiem" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Đơn vị công tác:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtDonViChuNhiem" disabled />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Cơ quan:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtCoQuanChuNhiem" disabled />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <div style="margin-left:15px;">Thông tin thư kí đề tài</div>
+            <input type="hidden" id="txtIdThuKy" value="-1" />
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Mã/Họ tên:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="" id="txtMaThuKy">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="btnMaThuKy" data-toggle="modal" data-target="#myModal" onclick="showmodal(2)"><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Họ tên:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtHoTenThuKy" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Học hàm/Học vị:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtHocHamThuKy" disabled />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Email:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtEmailThuKy" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Ngày sinh:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtNgaySinhThuKy" disabled />
+                </div>
+                <div class="control-label col-md-6" style="font-size:13px; padding-right:0px;"></div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Điện thoại:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtSDTThuKy" disabled />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Di động:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtDiDongThuKy" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Đơn vị công tác:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtdonvithuky" disabled />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Cơ quan:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtcoquanthuky" disabled />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>Thông tin cán bộ tham gia đề tài</div>
+    <div class="row">
+        <input type="hidden" id="txtIdCBThamGia" />
+        <div class="form-group col-md-6">
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Mã/Họ tên:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="" id="txtMaCBThamGia">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal" onclick="showmodal(3)"><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Họ tên:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtHoTenCB" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Đơn vị công tác:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtDonVi" disabled />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Cơ quan:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtCoQuan" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Nhiệm vụ:</span>
+                <div class="col-md-9">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtNhiemVu" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Học hàm/vị:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtHocVi" disabled />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Di động:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" id="txtDiDong" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Thực hiện từ:</span>
+                <div class="col-md-3" style="padding-right:0px;">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="date" id="txtCBTuNgay" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                </div>
+                <span class="control-label col-md-2" style="font-size:13px; padding-right:0px;">Đến:</span>
+                <div class="col-md-4">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="date" id="txtCBDenNgay" value="@DateTime.Now.AddYears(1).ToString("yyyy-MM-dd")" />
+                </div>
+            </div>
+            <div class="row">
+                <span class="control-label col-md-3" style="font-size:13px; padding-right:0px;">Nội dung:</span>
+                <div class="col-md-7">
+                    <input class="form-control" style="padding: 0px 5px 0px 5px;" type="text" id="txtCBNoiDung" />
+                </div>
+                <div class="col-md-2">
+                    <button class="form-control btn btn-primary" id="btnThemCB" onclick="Save()">Thêm</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" id="divCabBoThamGia" style="margin-top:15px; padding-left: 15px; padding-right:15px;">
+            @{Html.RenderAction("DanhSachCanBoThamGia", "DeTai");}
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal cán bộ-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Danh sách cán bộ</h4>
+            </div>
+            <div class="modal-body">
+                <div class=" row">
+                    <span class="col-md-4 control-label">Mã/Tên cán bộ:</span>
+                    <div class="col-md-6">
+                        <input type="text" id="txtTimKiem" class="form-control" />
+                    </div>
+                    <div class=" col-md-2">
+                        <button class="btn btn-default form-control" id="btnSearch" onclick="Search()"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+                @{Html.RenderAction("SelectCanBo", "CanBo");}
+
+                <div id="divPaginate">
+                    @Html.Action("RenderPaginations", "CanBo")
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="divLoadNew">
+    @{Html.RenderAction("NewDeTai", "DeTai");}
+</div>
+
+
+@section Scripts{
+    <script>
+        var pageIndex = 1;
+        var max = 1;
+        var macb = '';
+        var cbType = 1;
+        $(document).ready(function () {
+            $('.pagination li').on('click', function () {
+                debugger;
+                var $this = $(this);
+                var str = $this.text().trim();
+                var str1 = '<<';
+                var str2 = '>>';
+                if (str == str1) {
+                    if (pageIndex > 1) {
+                        pageIndex = parseInt(pageIndex) - 1;
+                        var url = '/CanBo/SelectCanBo?ma_cb=' + macb + '&page=' + pageIndex;
+                        $('#divChonCanBo').load(url);
+
+                        $('.pagination li').removeClass('active');
+                        if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+                            $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+                        }
+                    }
+                    else pageIndex = 1;
+                }
+                else if (str == str2) {
+                    if (pageIndex < max) {
+                        pageIndex = parseInt(pageIndex) + 1;
+                        var url = '/CanBo/SelectCanBo?ma_cb=' + macb + '&page=' + pageIndex;
+                        $('#divChonCanBo').load(url);
+
+                        $('.pagination li').removeClass('active');
+                        if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+                            $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+                        }
+                    }
+                    else
+                        pageIndex = max;
+                }
+                else {
+                    pageIndex = $this.text();
+                    var url = '/CanBo/SelectCanBo?ma_cb=' + macb + '&page=' + pageIndex;
+                    $('#divChonCanBo').load(url);
+
+                    $('.pagination li').removeClass('active');
+                    if (!$this.hasClass('active')) {
+                        $this.addClass('active');
+                    }
+                }
+            });
+
+            $('#btnSearch').on('click', function () {
+                debugger;
+                macb = $('#txtTimKiem').val();
+                pageIndex = 1;
+
+                var url = '/CanBo/SelectCanBo?ma_cb=' + macb + '&page=' + pageIndex;
+                $('#divChonCanBo').load(url);
+
+                var url_pagi = '/CanBo/RenderPaginations?ma_cb=' + macb;
+                $('#divPaginate').load(url_pagi);
+            });
+        });
+
+
+        function maxPage(mp) {
+            debugger;
+            max = mp;
+        }
+
+        function Search() {
+            debugger;
+            macb = $('#txtTimKiem').val().replace(' ', '_');
+            pageIndex = 1;
+
+            var url = '/CanBo/SelectCanBo?ma_cb=' + macb + '&page=' + pageIndex;
+            $('#divChonCanBo').load(url);
+
+            var url_pagi = '/CanBo/RenderPaginations?ma_cb=' + macb;
+            $('#divPaginate').load(url_pagi);
+
+        }
+
+        function showmodal(type) {
+            cbType = type;
+        }
+
+        function find(ID_cb, Ma_cb, Ho_ten, Ngay_sinh, Di_dong, Don_vi, Hoc_ham, Email) {
+            debugger;
+            if (cbType == 1) {
+                $('#txtIdChuNhiem').val(ID_cb);
+                $('#txtmaChuNhiem').val(Ma_cb);
+                $('#txtTenChuNhiem').val(Ho_ten);
+                $('#txtHochamChuNhiem').val(Hoc_ham);
+                $('#txtNgaySinhChuNhiem').val(Ngay_sinh);
+                $('#txtSDTChuNhiem').val(Di_dong);
+                $('#txtDiDOngChuNhiem').val(Di_dong);
+                $('#txtDonViChuNhiem').val(Don_vi);
+                $('#txtCoQuanChuNhiem').val(Don_vi);
+                $('#txtEmailChuNhiem').val(Email);
+            }
+            else if (cbType == 2) {
+                $('#txtIdThuKy').val(ID_cb);
+                $('#txtMaThuKy').val(Ma_cb);
+                $('#txtHoTenThuKy').val(Ho_ten);
+                $('#txtHocHamThuKy').val(Hoc_ham);
+                $('#txtNgaySinhThuKy').val(Ngay_sinh);
+                $('#txtSDTThuKy').val(Di_dong);
+                $('#txtDiDongThuKy').val(Di_dong);
+                $('#txtdonvithuky').val(Don_vi);
+                $('#txtcoquanthuky').val(Don_vi);
+                $('#txtEmailThuKy').val(Email);
+            }
+            else if (cbType == 3) {
+                $('#txtIdCBThamGia').val(ID_cb);
+                $('#txtMaCBThamGia').val(Ma_cb);
+                $('#txtHoTenCB').val(Ho_ten);
+                $('#txtHocVi').val(Hoc_ham);
+                $('#txtDiDong').val(Di_dong);
+                $('#txtDonVi').val(Don_vi);
+                $('#txtCoQuan').val(Don_vi);
+            }
+        }
+
+
+        function Save() {
+            debugger;
+            var dt = {};
+            dt.ID_de_tai = $('#txtIdDeTai').val();
+            dt.Ma_de_tai = $('#txtMaDeTai').val();
+            dt.Ten_de_tai_vn = $('#txtTenDeTai').val();
+            dt.Ten_de_tai_en = $('#txtTenTiengAnh').val();
+            dt.ID_cb = $('#txtIdChuNhiem').val();
+            dt.ID_thu_ky = $('#txtIdThuKy').val();
+            dt.ID_loai_de_tai = 1;
+            dt.ID_loai_hinh = $('#SelectLoaiHinhNghienCuu').val();
+            dt.ID_linh_vuc = $('#SelectLinhVucNghienCuu').val();
+            dt.ID_cq_ct = $('#SelectDonViChuTri').val();
+            dt.ID_cq_cq = $('#SelectCoQuanChuQuan').val();
+            dt.ID_cap_ql = $('#SelectCapQuanLy').val();
+            dt.Muc_tieu_de_tai = $('#txtMucTieu').val();
+            dt.Noi_dung = $('#txtMucTieu').val();
+            dt.Du_kien_dt = $('#txtDuKienUngDung').val();
+            dt.Tu_ngay = $('#txtNgayKetThuc').val();
+            dt.Den_ngay = $('#txtNgayKetThuc').val();
+            dt.Ngan_sach_nn = 0;
+            dt.Nguon_khac = $('#txtSoTien').val();
+            dt.Xet_duyet = false;
+            dt.ID_Tinh_trang = $('#SelectTinhTrangDeTai').val();
+            dt.De_tai = true;
+            dt.Nam = $('#txtNamDangKy').val();
+            dt.Kinh_phi_dk = $('#txtSoTien').val();
+            dt.ID_cq_ph = $('#SelectDonViPhoiHop').val();
+            dt.ID_de_tai_cha = 0;
+            dt.UserID = 0;
+            dt.De_tai_mat = false;
+            dt.ID_khoa = 0;
+            dt.Trang_thai = true;
+            dt.HocTrinh = $('#txtSoHocTrinh').val();
+            dt.ID_Cb_HuongDan = 0;
+            dt.DeTaiKeHoach =  $('#txtDeTaiKeHoach').is(":checked");
+
+            var url = '/DeTai/Save';
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: JSON.stringify({ detai: dt }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result == "True") {
+
+                    }
+                    else {
+
+                    }
+                },
+                error: function () {
+
+                }
+            });
+
+            if (dt.ID_de_tai == -1) {
+                $('#divLoadNew').load('/DeTai/NewDeTai');
+
+                var id = $('#txtId').val();
+                $('#txtIdDeTai').val(parseInt(id) + 1);
+            }
+
+            // thêm cán bộ
+            var dt_cb = {};
+            dt_cb.ID_cb = $('#txtIdCBThamGia').val();
+            dt_cb.ID_de_tai = $('#txtIdDeTai').val();
+            dt_cb.Nhiem_vu = $('#txtNhiemVu').val();
+            dt_cb.Mo_ta = $('#txtCBNoiDung').val();
+            dt_cb.Tu_ngay = $('#txtCBTuNgay').val();
+            dt_cb.Den_ngay = $('#txtCBDenNgay').val();
+
+            var url = '/DeTai/Save_DT_CB';
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: JSON.stringify({ DeTai_CanBo: dt_cb }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result == "True") {
+
+                    }
+                    else {
+
+                    }
+
+                },
+                error: function () {
+
+                }
+            });
+
+
+            var url = "/DeTai/DanhSachCanBoThamGia?id_DeTai=" + $('#txtIdDeTai').val();
+            $('#divCabBoThamGia').load(url);
+
+        }
+
+
+    </script>
+}

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.dmChucVuHoiDong>
+
+
+<table class="table table-hover">
+    <tr>
+        <th>
+           Mã chức vụ
+        </th>
+        <th>
+           Chức vụ
+        </th>
+        <th>
+          Hệ số sét chọn
+        </th>
+        <th>
+           Hệ số cơ sở
+        </th>
+        <th>
+            Hệ số chính thức
+        </th>
+        <th>
+            Hệ số thẩm định
+        </th>
+        <th width="150">Hành động</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ma_chuc_vu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chuc_vu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.He_so_xet_chon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.He_so_co_so)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.He_so_chinh_thuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.He_so_tham_dinh)
+        </td>
+        <td width="150">
+
+            <a href="javascript:void(0)" style="color:blue; margin-right:20px;" data-toggle="tooltip" title='Sửa' onclick="ShowModalDetail('@item.ID_chuc_vu_hd','@item.Ma_chuc_vu','@item.Chuc_vu','@item.He_so_xet_chon','@item.He_so_co_so','@item.He_so_chinh_thuc','@item.He_so_tham_dinh')"> <i class="glyphicon glyphicon-pencil" ></i></a>  @*></a>*@
+
+            <a href="javascript:void(0)" style="color:red" data-toggle="tooltip" title='Xóa' onclick="ShowModalDelete('@item.ID_chuc_vu_hd')"><i class="glyphicon glyphicon-remove"></i></a>
+
+        </td>
+    </tr>
+}
+
+</table>

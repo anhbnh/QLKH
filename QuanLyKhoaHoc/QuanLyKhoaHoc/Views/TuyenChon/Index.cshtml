@@ -1,0 +1,68 @@
+﻿@model QuanLyKhoaHoc.Models.khDeTai
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    DANH SÁCH XÉT DUYỆT TUYỂN CHỌN ĐỀ TÀI - CHUYÊN ĐỀ
+}
+
+@section TopMenu
+{
+    <button class="btn-link" id="btnSearch"><i class="glyphicon glyphicon-search"></i>Lọc</button>
+    <a class="btn-link" id="btnAdd" href="#"><i class="glyphicon glyphicon-plus"></i>Thông tin bổ sung</a>
+    <button class="btn-link" id="btnDelete"><i class="glyphicon glyphicon-remove"></i>Nội dung duyệt</button>
+    <a class="btn-link" id="InGiayMoi"><i class="glyphicon glyphicon-print"></i>In giấy mời</a>
+    <button class="btn-link" id="btnEdit"><i class="glyphicon glyphicon-plane"></i>Nhập bảng điểm</button>
+    <button class="btn-link" id="btnEdit"><i class="glyphicon glyphicon-plane"></i>Nhập nhận xét</button>
+    <button class="btn-link" id="btnEdit"><i class="glyphicon glyphicon-plane"></i>Nhập bồi dưỡng</button>
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <span class="control-label col-md-1">Năm:</span>
+        <div class="col-md-2">
+            <input type="number" id="txtNam" value="@DateTime.Now.Year" />
+        </div>
+        <span class="control-label col-md-1" style="text-align:right;">Loại:</span>
+        <div class="col-md-2">
+            <label class="radio-inline"><input type="radio" name="txtDeTai" id="txtDeTai" checked>Đề tài</label>
+            <label class="radio-inline"><input type="radio" name="txtDeTai" id="txtDeTai">Chuyên đề</label>
+        </div>
+        <span class="control-label col-md-2" style="text-align:right;">Tình trạng:</span>
+        <div class="col-md-3">
+            <label class="radio-inline"><input type="radio" name="txtTinhtrang" id="txtTinhtrang" checked>Đã duyệt</label>
+            <label class="radio-inline"><input type="radio" name="txtTinhtrang" id="txtTinhtrang">Chưa duyệt</label>
+        </div>
+    </div>
+
+
+    <div class=" row">
+        @{Html.RenderAction("DanhSachDeTaiTuyenChon", "TuyenChon");}
+    </div>
+</div>
+
+
+
+
+
+
+
+@section Scripts{
+    <script>
+        // lọc
+        $('#btnSearch').click(function () {
+            debugger;
+            var detai = $('input:radio[name=txtDeTai]')[0].checked;
+            var tinhtrang = $('input:radio[name=txtTinhtrang]')[0].checked;
+            var nam = $('#txtNam').val();
+
+            var url = '/TuyenChon/DanhSachDeTaiTuyenChon?nam=' + nam + '&detai=' + detai + '&duyet=' + tinhtrang;
+            $('#divDanhSachDeTaiXetDuyet').load(url);
+
+        
+        });
+    </script>
+}

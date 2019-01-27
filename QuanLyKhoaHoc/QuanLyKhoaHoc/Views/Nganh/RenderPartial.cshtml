@@ -1,0 +1,9 @@
+﻿@model List<QuanLyKhoaHoc.Models.dmNganhDaoTao>
+
+<select id="selectNganh" class="form-control">
+    <option value="-1">Chọn</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.ID_nganh"> (@item.Ma_nganh) @item.Ten_nganh </option>
+    }
+</select>

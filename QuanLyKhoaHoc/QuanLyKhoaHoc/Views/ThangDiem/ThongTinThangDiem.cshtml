@@ -1,0 +1,58 @@
+﻿@model QuanLyKhoaHoc.Models.khThangDiem
+
+@{
+    var nam = Model != null ? Model.Nam : DateTime.Now.Year.ToString();
+    var SoBangDiem = Model != null ? Model.So : "1";
+    var idLoaiHoiDong = Model != null ? Model.ID_loai_hoi_dong : -1;
+    var min = Model != null ? Model.Diem_tran : 1;
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<input type="hidden" name="txtId" id="txtId" value="-1" />
+<div class="row">
+    <div class="col-md-2">
+        <span class="control-label">Năm:</span>
+    </div>
+    <div class="col-md-3">
+        <input type="number" class="form-control" id="txtNam" value="@nam" min="1990" disabled />
+        @Html.ValidationMessageFor(model => model.Nam, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-2 col-md-offset-2">
+        <span class="control-label">Số bảng thang điểm:</span>
+    </div>
+    <div class="col-md-3">
+        <input type="number" class="form-control" id="txtSoThangDiem" value="@SoBangDiem" min="1" disabled />
+        @Html.ValidationMessageFor(model => model.So, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="row" style="margin-top:5px;">
+    <div class="col-md-2">
+        <span class="control-label">Loại hội đồng:</span>
+    </div>
+    <div class="col-md-5">
+        @{Html.RenderAction("SelectLoaiHoiDong", "LoaiHoiDong");//, new { idHoiDong = idLoaiHoiDong });
+              }
+    </div>
+
+    <div class="col-md-2">
+        <span class="control-label">Điểm đạt min:</span>
+    </div>
+    <div class="col-md-3">
+        <input type="number" class="form-control" disabled id="txtDiemMin" value="1" min="0" />
+        @Html.ValidationMessageFor(model => model.Diem_tran, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="form-group">
+        <span class="control-label col-md-2">Tên bảng điểm:</span>
+        <div class="col-md-10">
+            <input type="tel" class="form-control" id="txtTenBangDiem" disabled placeholder="Tên bảng điểm" />
+        </div>
+    </div>
+</div>
+
+
+

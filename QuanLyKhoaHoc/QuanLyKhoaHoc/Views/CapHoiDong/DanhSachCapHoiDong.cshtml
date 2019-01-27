@@ -1,0 +1,33 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.khCapHoiDong>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ma_cap_hd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ten_cap_hd)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ma_cap_hd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ten_cap_hd)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_cap_hd }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_cap_hd }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_cap_hd })
+        </td>
+    </tr>
+}
+
+</table>

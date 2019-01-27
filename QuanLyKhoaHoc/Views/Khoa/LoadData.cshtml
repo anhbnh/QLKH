@@ -1,0 +1,39 @@
+﻿
+<table class="table table-bordered table-hover table-header">
+    <tr>
+        <th>
+            Mã khoa
+        </th>
+        <th>
+            Tên khoa
+        </th>
+        <th>
+            Tên tiếng anh
+        </th>
+        <th class="text-center">
+            Thao tác
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Ma_khoa
+            </td>
+            <td>
+                @item.Ten_khoa
+            </td>
+            <td>
+                @item.Ten_khoa_en
+            </td>
+            <td>
+                <a href="javascript:void(0)" style="color:blue" data-toggle="tooltip" title="Sửa" onclick="ShowModalDetail('@item.ID_khoa', ' @item.Ma_khoa', '@item.Ten_khoa', ' @item.Ten_khoa_en')"><span class="s-icon"><i class="ti-pencil"></i></span></a>
+                <a href="javascript:void(0)" style="color:red" data-toggle="tooltip" title="Xóa" onclick="showModalDelete('@item.ID_khoa')"><span class="s-icon"><i class="ti-close"></i></span></a>
+
+            </td>
+
+        </tr>
+    }
+
+</table>

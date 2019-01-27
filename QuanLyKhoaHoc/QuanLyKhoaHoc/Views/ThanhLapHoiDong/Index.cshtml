@@ -1,0 +1,154 @@
+﻿@model QuanLyKhoaHoc.Models.khThanhLapHoiDong
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header
+{
+    Thành lập hội đồng
+}
+@section TopMenu{
+<a href="#" id="btnInsert">
+    <span class="glyphicon" style="font-size:14px; color:green; "><i class="glyphicon glyphicon-plus"></i></span>
+    <span class="s-text">Thêm mới</span>
+</a>
+    |
+<a href="#" id="btnUpdate">
+    <span class="glyphicon" style="font-size:14px; color:#0000CD; "><i class="glyphicon glyphicon-pencil"></i></span>
+    <span class="s-text">Chỉnh sửa</span>
+</a>
+    |
+<a href="#" id="btnSave">
+    <span class="glyphicon" style="font-size:14px; color:#000080; "><i class="glyphicon glyphicon-floppy-saved"></i></span>
+    <span>Lưu lại</span>
+</a>
+    |
+<a href="#" id="btnCancel">
+    <span class="glyphicon" style="font-size:14px; color:#FF0000; "><i class="glyphicon glyphicon-remove"></i></span>
+    <span>Hủy</span>
+</a>
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            @{Html.RenderAction("DanhSachHoiDong", "ThanhLapHoiDong");}
+        </div>
+        <div class="col-md-9" id="divThongTin">
+            <div class="panel panel-default">
+                <div class="panel-heading">Thông tin hội đồng</div>
+                <div class="panel-body" id="divTongTinBangDiem">
+                    @{Html.RenderAction("ThongTinHoiDong", "ThanhLapHoiDong");}
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <input type="hidden" id="txtId_CT_HD" value="-1" />
+                <input type="hidden" id="txtIdCB" value="-1" />
+                <div class="panel-heading">Thông tin cán bộ trong hội đồng</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <span class="control-label">Mã/Họ tên:</span>
+                        </div>
+                        <div class=" col-md-3" style="padding-right:0px;">
+                            <input type="text" class="form-control" id="txtMaCB" placeholder="Mã CB" />
+                        </div>
+                        <div class=" col-md-2" style="padding-left:0px;">
+                            <button class=" btn btn-default" id="btnSearch">
+                                <i class="glyphicon glyphicon-search"></i>
+                                Tìm
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-md-2">
+                            <span class="control-label">Họ và tên:</span>
+                        </div>
+                        <div class="col-md-4" style="padding-right:0px;">
+                            <input type="text" id="txtTenCanBo" placeholder="Tên cán bộ" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <span class="control-label">Di động:</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="txtSDT" class="form-control" placeholder="SĐT" />
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class=" col-md-2">
+                            <span class="control-label">Đơn vị:</span>
+                        </div>
+                        <div class="col-md-4" style="padding-right:0px;">
+                            <input type="text" id="txtDonVi" placeholder="Tên đơn vị" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <span class="control-label">Chức vụ hội đồng:</span>
+                        </div>
+                        <div class="col-md-3">
+                            @{Html.RenderAction("SelectChucVuHoiDong", "ChucVuHoiDong");}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-md-2">
+                            <span class="control-label">Ghi chú</span>
+                        </div>
+                        <div class=" col-md-7">
+                            <input type="text" class="form-control" id="txtGhiChu" placeholder="Ghi chú" />
+                        </div>
+                        <div class=" col-md-3">
+                            <button class="btn btn-default" id="btnThemCanBo" style="width:75px;"><i class="glyphicon glyphicon-plus" style="color:green;"></i>Thêm</button>
+                            <button class="btn btn-default" id="btnThemCanBo" style="margin-left:10px; width:75px;"><i class="glyphicon glyphicon-remove" style="color:green;"></i>Hủy</button>
+                        </div>
+                    </div>
+
+                    @{Html.RenderAction("LoadChiTietHoiDong", "ThanhLapHoiDong");}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divTD" style="top:-1000px">
+    @*@{Html.RenderAction("Id_ThangDiem", "ThangDiem");}*@
+</div>
+
+
+
+
+@section Scripts{
+
+    <script>
+        var id_HoiDong = -1;
+        function LoadThongTinHoiDong(ID_hd, So_qd, Ngay_lap, ID_cap_hd, ID_Loai_hoi_dong, Ten_hd, Nam) {
+            debugger;
+            $('#txtId').val(ID_hd);
+            $('#txtSoQuyetDinh').val(So_qd);
+            $('#txtNgay').val(Ngay_lap);
+            $('#txtNam').val(Nam);
+            $('#SelectCapHoiDong').val(ID_cap_hd);
+            $('#SelectLoaiHoiDong').val(ID_Loai_hoi_dong);
+            $('#txtTenHoiDong').val(Ten_hd);
+            id_HoiDong = ID_hd;
+            // chi tiết bảng điểm
+            var url = '/ThanhLapHoiDong/LoadChiTietHoiDong?id_HoiDong=' + id_HoiDong;
+            $('#divChiTietHoiDong').load(url);
+        }
+
+        function ShowChiTietHoiDong(ID_hd_chi_tiet, SDT, ID_cb, Ma_cb, Ho_ten, Ten_Don_Vi, Chuc_vu_dv, ID_chuc_vu_hd, Ghi_chu)
+        {
+            $('#txtId_CT_HD').val(ID_hd_chi_tiet);
+            $('#txtIdCB').val(ID_cb);
+            $('#txtMaCB').val(Ma_cb);
+            $('#txtTenCanBo').val(Ho_ten);
+            $('#txtSDT').val(SDT);
+            $('#txtDonVi').val(Ten_Don_Vi);
+            $('#SelectChucVuHoiDong').val(ID_chuc_vu_hd);
+            $('#txtGhiChu').val(Ghi_chu);
+        }
+    </script>
+}

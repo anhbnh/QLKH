@@ -1,0 +1,60 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.ChiTietHoiDong>
+
+
+<div style="width:auto; overflow-x:auto;height: 300px;" id="divChiTietHoiDong">
+
+    <table class="table  table-bordered table-hover" style="width:1200px;">
+        <tr>
+            <th width="100">
+                Mã cán bộ
+            </th>
+            <th width="200">
+                Họ tên cán bộ
+            </th>
+            <th width="200">
+                Đơn vị
+            </th>
+            <th width="200">
+                Chức vụ đơn vị
+            </th>
+            <th width="200">
+                Chức vụ hội đồng
+            </th>
+            <th width="300">
+               Ghi chú
+            </th>
+            <td style="width:150px;" >Hành động</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="100">
+                    @Html.DisplayFor(modelItem => item.Ma_cb)
+                </td>
+                <td width="200">
+                    @Html.DisplayFor(modelItem => item.Ho_ten)
+                </td>
+                <td width="200">
+                    @Html.DisplayFor(modelItem => item.Ten_Don_Vi)
+                </td>
+                <td width="200">
+                    @Html.DisplayFor(modelItem => item.Chuc_vu_dv)
+                </td>
+                <td width="200">
+                    @Html.DisplayFor(modelItem => item.Chuc_vu_hd)
+                </td>
+                <td width="300">
+                    @Html.DisplayFor(modelItem => item.Ghi_chu)
+                </td>
+                <td width="150">
+
+                    <a href="javascript:void(0)" style="color:blue; margin-right:20px;" data-toggle="tooltip" title='Sửa' onclick="ShowChiTietHoiDong('@item.ID_hd_chi_tiet','@item.SDT','@item.ID_cb','@item.Ma_cb','@item.Ho_ten','@item.Ten_Don_Vi','@item.Chuc_vu_dv','@item.ID_chuc_vu_hd','@item.Ghi_chu')"> <i class="glyphicon glyphicon-pencil"></i></a>  @*></a>*@
+
+                    <a href="javascript:void(0)" style="color:red" data-toggle="tooltip" title='Xóa' onclick="alter('Xóa : '+ @item.ID_hd_chi_tiet)"><i class="glyphicon glyphicon-remove"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

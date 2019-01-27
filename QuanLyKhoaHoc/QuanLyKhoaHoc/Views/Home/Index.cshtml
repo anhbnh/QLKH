@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "/Views/Shared/_layout.cshtml";
+}
+
+
+@section Css{
+    <style type="text/css">
+        .div-menu {
+            width: 1040px;
+            height: 560px;
+            background: url(../img/bgr.jpg) no-repeat;
+        }
+
+        .btn-size {
+            width: 55px;
+            height: 50px;
+        }
+
+        #btnDangKi {
+            margin-top: 321px;
+        }
+
+        #btnUngDung {
+            margin-top: 53px;
+            margin-left: 29px;
+        }
+
+        #btnTuyenChon {
+            margin-top: 268px;
+            margin-left: 12px;
+        }
+
+        #btnNghiemThuChinhThuc {
+            margin-top: 135px;
+            margin-left: 46px;
+        }
+
+        #btnThamDinh {
+            margin-top: 269px;
+            margin-left: 0px;
+        }
+
+        #btnNghiemThuCoSo {
+            margin-top: 127px;
+            margin-left: 13px;
+        }
+
+        #btnQLThucHien {
+            margin-top: 376px;
+            margin-left: 15px;
+        }
+    </style>
+}
+
+<div class="div-menu row">
+
+    <div class="col-md-2">
+        <img src="~/img/LogoBK.png" width="130" height="130" style=" margin-top: 8px; margin-left:55px;" />
+    </div>
+    <div class="col-md-1">
+        <a href="@Url.Action("Index","DeTai")"><div class="btn-size" id="btnDangKi"></div></a>
+        <a href="#"><div class="btn-size" id="btnUngDung"></div></a>
+    </div>  
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2">
+        <a href="@Url.Action("Index", "TuyenChon")"><div class="btn-size" id="btnTuyenChon"></div></a>
+        <a href="#"><div class="btn-size" id="btnNghiemThuChinhThuc"></div></a>
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-1">
+        <a href="#"><div class="btn-size" id="btnThamDinh"></div></a>
+        <a href="#"><div class="btn-size" id="btnNghiemThuCoSo"></div></a>
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-3">
+        <a href="#"><div class="btn-size" id="btnQLThucHien"></div></a>
+    </div>
+</div>

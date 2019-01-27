@@ -1,0 +1,140 @@
+﻿@model QuanLyKhoaHoc.Models.khDeTai
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    DANH SÁCH ĐỀ TÀI/CHUYÊN ĐỀ ĐĂNG KÝ
+}
+
+@section TopMenu
+{
+    <button class="btn-link" id="btnSearch"><i class="glyphicon glyphicon-search"></i>Lọc</button>
+    <a class="btn-link" id="btnAdd" href="@Url.Action("Create","DeTai")"><i class="glyphicon glyphicon-plus"></i>Thêm đăng ký</a>
+    <button class="btn-link" id="btnDelete"><i class="glyphicon glyphicon-remove"></i>Xóa đăng ký</button>
+    <button class="btn-link" id="btnEdit"><i class="glyphicon glyphicon-pencil"></i>Sửa đăng ký</button>
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1">
+            <span class="control-label">Năm:</span>
+        </div>
+        <div class="col-md-1" style="padding-right:0px;">
+            <input class="form-control" type="number" value="@DateTime.Now.Year" min="1990" id="txtNamDangKy" />
+        </div>
+        <div class="col-md-1 col-md-offset-2">
+            <span class="control-label">Lọc theo:</span>
+        </div>
+        <div class="col-md-4">
+            <label class="radio-inline"><input type="radio" name="txtLocTheo" checked>Đề tài</label>
+            <label class="radio-inline"><input type="radio" name="txtLocTheo">Chuyên đề</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1" style="padding-right:0px;">
+            <span class="control-label">Cấp quản lý:</span>
+        </div>
+        <div class="col-md-3" style="padding-right:0px;">
+            @{Html.RenderAction("SelectCapQuanLy", "CapQuanLy");}
+        </div>
+        <div class="col-md-1">
+            <span class="control-label">Đơn vị:</span>
+        </div>
+        <div class="col-md-3" style="padding-right:0px">
+            @{Html.RenderAction("SelectDonViChuTri", "DonViChuTri");}
+        </div>
+        <div class="col-md-1">
+            <span class="control-label">Khoa:</span>
+        </div>
+        <div class="col-md-3" style="padding:0px;">
+            @{Html.RenderAction("SelectKhoa", "Khoa");}
+        </div>
+    </div>
+
+    <div class="row">
+        @{Html.RenderAction("LoadData", "DeTai");}
+    </div>
+    @*<div class="row" id="divPages">
+        @Html.Action("RenderPaginations")
+    </div>*@
+</div>
+
+
+@section Scripts{
+    <script>
+        var pageIndex = 1;
+        var max = 1;
+
+        //$('.pagination li').on('click', function () {
+        //    debugger;
+        //    var $this = $(this);
+        //    var str = $this.text().trim();
+        //    var str1 = '<<';
+        //    var str2 = '>>';
+        //    var detai = $('input:radio[name=txtLocTheo]')[0].checked;
+        //    var nam = $('#txtNamDangKy').val();
+        //    if (str == str1) {
+        //        if (pageIndex > 1) {
+        //            pageIndex = parseInt(pageIndex) - 1;
+        //            var url = '/DeTai/LoadData?nam=' + nam + '&detai=' + detai + '&page=' + pageIndex;
+        //            $('#divDanhSachDeTai').load(url);
+
+        //            $('.pagination li').removeClass('active');
+        //            if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+        //                $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+        //            }
+        //        }
+        //        else pageIndex = 1;
+        //    }
+        //    else if (str == str2) {
+        //        if (pageIndex < max) {
+        //            pageIndex = parseInt(pageIndex) + 1;
+        //            var url = '/DeTai/LoadData?nam=' + nam + '&detai=' + detai + '&page=' + pageIndex;
+        //            $('#divDanhSachDeTai').load(url);
+
+
+        //            $('.pagination li').removeClass('active');
+        //            if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+        //                $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+        //            }
+        //        }
+        //        else
+        //            pageIndex = max;
+        //    }
+        //    else {
+        //        pageIndex = $this.text();
+        //        var url = '/DeTai/LoadData?nam=' + nam + '&detai=' + detai + '&page=' + pageIndex;
+        //        $('#divDanhSachDeTai').load(url);
+
+        //        $('.pagination li').removeClass('active');
+        //        if (!$this.hasClass('active')) {
+        //            $this.addClass('active');
+        //        }
+        //    }
+
+
+
+        //});
+
+        //function maxPage(mp) {
+        //    max = mp;
+        //}
+
+        // lọc
+        $('#btnSearch').click(function () {
+            debugger;
+            var detai = $('input:radio[name=txtLocTheo]')[0].checked;
+            var nam = $('#txtNamDangKy').val();
+
+            var url = '/DeTai/LoadData?nam=' + nam + '&detai=' + detai + '&page=' + 1;
+            $('#divDanhSachDeTai').load(url);
+
+            var urlPage = '/DeTai/RenderPaginations?nam=' + nam + '&detai=' + detai ;
+            $('#divPages').load(urlPage);
+
+        });
+    </script>
+}

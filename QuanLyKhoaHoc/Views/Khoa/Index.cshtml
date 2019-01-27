@@ -1,0 +1,181 @@
+﻿@{
+    ViewBag.Title = "Khoa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Khoa</h2>
+<div class="row">
+    <button class="btn btn-primary" style="margin-left:20px;" id="btnCreate">Thêm mới</button>
+</div>
+
+<div id="divData">
+    @{
+        Html.RenderAction("LoadData");
+    }
+</div>
+<div class="text-center">
+    @Html.Action("RenderPaginations")
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modalCreate">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dissmiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">Cập nhật</h4>
+            </div>
+            <div class="modal-body">
+                @{
+                    Html.RenderPartial("/Views/Khoa/Create.cshtml");
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dissmiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnSave">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var id = -1;
+        var pageIndex = 1;
+        var max = 1;
+        $("#btnCreate").click(function () {
+            id = -1;
+            $("#txtMaKhoa").val("");
+            $("#txtTenKhoa").val("");
+            $("#txtTenKhoaEn").val("");
+            $("#modalCreate").modal("show");
+        });
+
+        function ShowModalDetail(Id_Khoa, MaKhoa, TenKhoa, TenKhoa_en) {
+            id = Id_Khoa;
+            $("#txtMaKhoa").val(MaKhoa);
+            $("#txtTenKhoa").val(TenKhoa);
+            $("#txtTenKhoaEn").val(TenKhoa_en);
+            $("#modalCreate").modal("show");
+        }
+
+        $("#btnSave").click(function () {
+            debugger;
+            var kh = {};
+            kh.ID_khoa = id;
+            kh.Ma_khoa = $("#txtMaKhoa").val();
+            kh.Ten_khoa = $("#txtTenKhoa").val();
+            kh.Ten_khoa_en = $("#txtTenKhoaEn").val();
+            var urlAction = "/Khoa/Save";
+            $.ajax({
+                type: "POST",
+                url: urlAction,
+                data: JSON.stringify({ khoa: kh }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result == "True") {
+
+                    }
+                    else {
+
+                    }
+
+                    $('#divData').load('/Khoa/LoadData');
+                    $('#modalCreate').modal('hide');
+                },
+                error: function () {
+
+                }
+            });
+        });
+
+        $('.pagination li').on('click', function () {
+            debugger;
+            var $this = $(this);
+            var str = $this.text().trim();
+            var str1 = '<<';
+            var str2 = '>>';
+            if (str == str1) {
+                if (pageIndex > 1) {
+                    pageIndex = parseInt(pageIndex) - 1;
+                    var url = '/Khoa/LoadData?page=' + pageIndex;
+                    $('#divData').load(url);
+
+                    $('.pagination li').removeClass('active');
+                    if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+                        $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+                    }
+                }
+                else pageIndex = 1;
+            }
+            else if (str == str2) {
+                if (pageIndex < max) {
+                    pageIndex = parseInt(pageIndex) + 1;
+                    var url = '/Khoa/LoadData?page=' + pageIndex;
+                    $('#divData').load(url);
+
+
+                    $('.pagination li').removeClass('active');
+                    if (!$(".pagination li:nth-child(" + (pageIndex + 1) + ")").hasClass('active')) {
+                        $(".pagination li:nth-child(" + (pageIndex + 1) + ")").addClass('active');
+                    }
+                }
+                else
+                    pageIndex = max;
+            }
+            else {
+                pageIndex = $this.text();
+                var url = '/Khoa/LoadData?page=' + pageIndex;
+                $('#divData').load(url);
+
+                $('.pagination li').removeClass('active');
+                if (!$this.hasClass('active')) {
+                    $this.addClass('active');
+                }
+
+                //$('.pagination li a').removeClass('btn btn-primary');
+                //if (!$(".pagination li a:nth-child(" + (1) + ")").hasClass('btn btn-primary')) {
+                //    $(".pagination li a:nth-child(" + (1) + ")").addClass('btn btn-primary');
+                //}
+            }
+
+
+
+        });
+
+        function maxPage(mp) {
+            debugger;
+            max = mp;
+        }
+
+        function showModalDelete(ID_Kh) {
+            if (confirm("Bạn có muốn xóa chuyên ngành này ?") == true) {
+                var urlAction = "../Khoa/Delete";
+                $.ajax({
+                    type: "POST",
+                    url: urlAction,
+                    data: JSON.stringify({ ID_khoa: ID_Kh }),
+                    contentType: 'application/json',
+                    success: function (result) {
+                        if (result == "True") {
+
+                            //    toastr.success('Lưu thành công');
+                        }
+                        else {
+                            //   toastr.error('Thất bại');
+                        }
+
+                        $("#LoadData").load("/Khoa/LoadData");
+                    },
+                    error: function () {
+                        //  toastr.error('Thất bại');
+                    }
+                });
+            }
+        }
+
+    </script>
+
+
+} 

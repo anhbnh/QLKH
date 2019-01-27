@@ -1,0 +1,187 @@
+﻿@model QuanLyKhoaHoc.Models.khNghiemThuThamDinh_NoiDung
+
+@{
+    ViewBag.Title = "NoiDungThamDinh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    Nội dung thẩm định đề tài
+}
+@section TopMenu
+{
+    <button class="btn-link" style="color:green;" id="btnSearch"><i class="glyphicon glyphicon-save"></i>Lưu</button>
+    <button class="btn-link" style="color:red;" id="btnAdd"><i class="glyphicon glyphicon-ban-circle"></i>Hủy</button>
+}
+
+<div class="form-horizontal">
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-md-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Thông tin chuyên đề:</span>
+        </div>
+        <div class="col-md-10">
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-md-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Thông tin hội thảo:</span>
+        </div>
+        <div class="col-md-10">
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-md-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Hoạt động khác:</span>
+        </div>
+        <div class="col-md-10">
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-md-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Hợp tác quốc tế:</span>
+        </div>
+        <div class="col-md-10">
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-md-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Thực hiện từ:</span>
+        </div>
+        <div class="col-md-2">
+            <div style="padding-right:0px;">
+                <input type="date" class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" />
+            </div>
+        </div>
+        <div class="col-md-1">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Đến:</span>
+        </div>
+        <div class="col-md-2">
+            <div style="padding-right:0px;">
+                <input type="date" class="form-control" style="padding: 0px 5px 0px 5px;" rows="2" />
+            </div>
+        </div>
+        <div class="col-md-5">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Phương pháp chuyển giao:</span>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-md-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Dạng sản phẩm yêu cầu:</span>
+        </div>
+        <div class="col-md-5">
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-md-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Kết luận:</span>
+        </div>
+        <div class="col-md-10">
+            <div style="padding-right:0px;">
+                <textarea class="form-control" style="padding: 0px 5px 0px 5px;" rows="5"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-sm-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Tổng kinh phí:</span>
+        </div>
+        <div class="col-sm-2">
+            <div style="padding-right:0px;">
+                <input style="padding: 0px 5px 0px 5px; width:90%; display:inline-block;" type="number" />
+                <h4 style="display:inline-block; color:red; font-size:25px; vertical-align:top; margin-top:2px; margin-bottom:0px;">*</h4>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Ngân sách NN:</span>
+        </div>
+        <div class="col-sm-2">
+            <div style="padding-right:0px;">
+                <input style="padding: 0px 5px 0px 5px; width:90%; display:inline-block;" type="number" />
+                <h4 style="display:inline-block; color:red; font-size:25px; vertical-align:top; margin-top:2px; margin-bottom:0px;">*</h4>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Nguồn khác:</span>
+        </div>
+        <div class="col-sm-2">
+            <div style="padding-right:0px;">
+                <input style="padding: 0px 5px 0px 5px; width:90%; display:inline-block;" type="number" />
+                <h4 style="display:inline-block; color:red; font-size:25px; vertical-align:top; margin-top:2px; margin-bottom:0px;">*</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-sm-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Trả công lao động:</span>
+        </div>
+        <div class="col-sm-2">
+            <div style="padding-right:0px;">
+                <input style="padding: 0px 5px 0px 5px; width:90%; display:inline-block;" type="number" />
+                <h4 style="display:inline-block; color:red; font-size:25px; vertical-align:top; margin-top:2px; margin-bottom:0px;">*</h4>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Phí vật liệu:</span>
+        </div>
+        <div class="col-sm-2">
+            <div style="padding-right:0px;">
+                <input style="padding: 0px 5px 0px 5px; width:90%; display:inline-block;" type="number" />
+                <h4 style="display:inline-block; color:red; font-size:25px; vertical-align:top; margin-top:2px; margin-bottom:0px;">*</h4>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Thiết bị máy móc:</span>
+        </div>
+        <div class="col-sm-2">
+            <div style="padding-right:0px;">
+                <input style="padding: 0px 5px 0px 5px; width:90%; display:inline-block;" type="number" />
+                <h4 style="display:inline-block; color:red; font-size:25px; vertical-align:top; margin-top:2px; margin-bottom:0px;">*</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-sm-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Xấy dựng sửa chữa nhỏ:</span>
+        </div>
+        <div class="col-sm-2">
+            <div style="padding-right:0px;">
+                <input style="padding: 0px 5px 0px 5px; width:90%; display:inline-block;" type="number" />
+                <h4 style="display:inline-block; color:red; font-size:25px; vertical-align:top; margin-top:2px; margin-bottom:0px;">*</h4>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="control-label" style="font-size:13px; padding-right:0px;">Chi khác:</span>
+        </div>
+        <div class="col-sm-2">
+            <div style="padding-right:0px;">
+                <input style="padding: 0px 5px 0px 5px; width:90%; display:inline-block;" type="number" />
+                <h4 style="display:inline-block; color:red; font-size:25px; vertical-align:top; margin-top:2px; margin-bottom:0px;">*</h4>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h4 style="display:inline-block; color:red; font-size:25px; vertical-align:top; margin-top:2px; margin-bottom:0px; margin-left:100px;">*</h4>
+            <p style="display:inline-block; color:red;">:Triệu đồng</p>
+        </div>
+    </div>
+
+</div>

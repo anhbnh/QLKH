@@ -1,0 +1,18 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.khThangDiem>
+
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+        Thang điểm đánh giá
+    </a>
+    <div style="height:450px; overflow-y:auto;">
+        @*height:500px; overflow-y:auto;*@
+        @foreach (var item in Model)
+        {
+            <a href="#" onclick="return LoadThongTinThangDiem('@item.ID_bd','@item.Nam', '@item.So', '@item.ID_loai_hoi_dong', '@item.Diem_tran', '@item.Ten_bd')" class="list-group-item list-group-item-action">
+                <i class="ti-arrow-circle-right"></i>
+                (@item.Nam) @item.Ten_bd
+            </a>
+        }
+    </div>
+
+</div>

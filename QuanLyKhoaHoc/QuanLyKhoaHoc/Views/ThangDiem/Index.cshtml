@@ -1,0 +1,261 @@
+﻿@model QuanLyKhoaHoc.Models.khThangDiem
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header
+{
+    Thang điểm đánh giá
+ 
+}
+@section TopMenu{
+   <a href="#" onclick="InsertThangDiem()" id="btnInsert">
+    <span class="glyphicon" style="font-size:14px; color:green; "><i class="glyphicon glyphicon-plus"></i></span>
+    <span class="s-text">Thêm mới</span>
+</a>
+    |
+<a href="#" onclick="UpdateThangDiem()" id="btnUpdate">
+    <span class="glyphicon" style="font-size:14px; color:#0000CD; "><i class="glyphicon glyphicon-pencil"></i></span>
+    <span class="s-text">Chỉnh sửa</span>
+</a>
+    |
+<a href="#" id="btnSave" onclick="Save()">
+    <span class="glyphicon" style="font-size:14px; color:#000080; "><i class="glyphicon glyphicon-floppy-saved"></i></span>
+    <span>Lưu lại</span>
+</a>
+    |
+<a href="#" id="btnCancel" onclick="Cancel()">
+    <span class="glyphicon" style="font-size:14px; color:#FF0000; "><i class="glyphicon glyphicon-remove"></i></span>
+    <span>Hủy</span>
+</a>
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            @{Html.RenderAction("ThangDiemTheoNam", "ThangDiem");}
+        </div>
+        <div class="col-md-9" id="divThongTin">
+            <div class="panel panel-default">
+                <div class="panel-heading">Thông tin thang điểm đánh giá</div>
+                <div class="panel-body" id="divTongTinBangDiem">
+                    @{Html.RenderAction("ThongTinThangDiem", "ThangDiem");}
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Chi tiết thang điểm đánh giá</div>
+                <div class="panel-body">
+                        <div class="row" style="padding-bottom:20px;">
+                            <input type="hidden" id="txtId_CT" value="-1" />
+                            <div class="col-md-2">
+                                <span class="control-label">Tiêu chuẩn đánh giá:</span>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" id="txtTieuChuanDanhGia" placeholder="Tiêu chuẩn" disabled />
+                            </div>
+                            <div class="col-md-1">
+                                <span class="control-label">Điểm:</span>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number" class="form-control" id="txtDiemDanhGia" value="1" min="1" disabled />
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-default" id="btnSave_ChiTiet" onclick="return Save()" disabled><i class="glyphicon glyphicon-plus" style="color:green;"></i>Thêm</button>
+                            </div>
+                        </div>
+
+                    @{Html.RenderAction("ThangDiemChiTiet", "ThangDiem");}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divTD" style="top:-1000px">
+    @{Html.RenderAction("Id_ThangDiem", "ThangDiem");}
+</div>
+
+@section Scripts
+{
+
+    <script>
+        var btnaction = 0;
+        var id_BD = -1;
+        function SelectLoaiHoiDong(idLoai) {
+            $('#SelectLoaiHoiDong').val(idLoai);
+        }
+        function LoadThongTinThangDiem(id, nam, sobangdiem, idloai, min, ten) {
+            $('#txtId').val(id);
+            $('#txtNam').val(nam);
+            $('#txtSoThangDiem').val(sobangdiem);
+            $('#SelectLoaiHoiDong').val(idloai);
+            $('#txtDiemMin').val(min);
+            $('#txtTenBangDiem').val(ten);
+            id_BD = id;
+            btnaction = 0;
+            // chi tiết bảng điểm
+            var url = '/ThangDiem/ThangDiemChiTiet?id_BD=' + id;
+            $('#divChiTiet').load(url);
+        }
+
+        function InsertThangDiem() {
+            debugger;
+            if (btnaction != 0) return;
+            btnaction = 1;
+
+            // resset text
+            $('#txtId').val(-1);
+            $('#txtNam').val(2017);
+            $('#txtSoThangDiem').val(1);
+            $('#SelectLoaiHoiDong').val(-1);
+            $('#txtDiemMin').val(1);
+            $('#txtTenBangDiem').val("");
+
+            // chi tiết bảng điểm
+            var url = '/ThangDiem/ThangDiemChiTiet?id_BD=' + -1;
+            $('#divChiTiet').load(url);
+
+            //
+            $('#txtNam').prop('disabled', false);
+            $('#txtSoThangDiem').prop('disabled', false);
+            $('#SelectLoaiHoiDong').prop('disabled', false);
+            $('#txtDiemMin').prop('disabled', false);
+            $('#txtTenBangDiem').prop('disabled', false);
+
+        }
+        var bd_c = {};
+        function UpdateThangDiem() {
+            debugger;
+            if (btnaction != 0) return;
+            btnaction = 2;
+            $('#txtNam').prop('disabled', false);
+            $('#txtSoThangDiem').prop('disabled', false);
+            $('#SelectLoaiHoiDong').prop('disabled', false);
+            $('#txtDiemMin').prop('disabled', false);
+            $('#txtTenBangDiem').prop('disabled', false);
+            $('#btnSave_ChiTiet').prop('disabled', false);
+
+            $('#txtTieuChuanDanhGia').prop('disabled', false);
+            $('#txtDiemDanhGia').prop('disabled', false);
+            bd_c.Nam = $('#txtNam').val();
+            bd_c.So = $('#txtSoThangDiem').val();
+            bd_c.ID_loai_hoi_dong = $('#SelectLoaiHoiDong').val();
+            bd_c.Diem_tran = $('#txtDiemMin').val();
+            bd_c.Ten_bd = $('#txtTenBangDiem').val();
+        }
+
+        function Save() {
+            debugger;
+            //if (btnaction == 0) return;
+            //btnaction = 0;
+
+            //lưu
+            var td = {};
+            td.ID_bd = $('#txtId').val();
+            td.Nam = $('#txtNam').val();
+            td.So = $('#txtSoThangDiem').val();
+            td.ID_loai_hoi_dong = $('#SelectLoaiHoiDong').val();
+            td.Diem_tran = $('#txtDiemMin').val();
+            td.Ten_bd = $('#txtTenBangDiem').val();
+
+            if (td.ID_bd == -1) {
+                save_ThangDiem(td);
+
+                var urlid = "/ThangDiem/Id_ThangDiem";
+                $('#divID').load(urlid);
+                $('#txtId').val($('#hidenId').val());
+            }
+            else if (td.ID_bd != -1) {
+                if (td.Nam != bd_c.Nam || td.So != bd_c.So || td.ID_loai_hoi_dong != bd_c.ID_loai_hoi_dong || td.Diem_tran != bd_c.Diem_tran || td.Ten_bd != bd_c.Ten_bd) {
+                    save_ThangDiem(td);
+                }
+            }
+
+            var td_ct = {};
+            td_ct.ID_tc_dg = $('#txtId_CT').val();
+            td_ct.ID_bd = $('#txtId').val();
+            td_ct.Tieu_chuan_danh_gia = $('#txtTieuChuanDanhGia').val();
+            td_ct.Diem = $('#txtDiemDanhGia').val();
+            if (td_ct.Tieu_chuan_danh_gia != "" || td_ct.Tieu_chuan_danh_gia != null)
+                save_CTThangDiem(td_ct);
+
+            $('#btnSave_ChiTiet').html('Thêm');
+
+            $('#btnSave_ChiTiet').prop('disabled', false);
+
+            $('#txtTieuChuanDanhGia').prop('disabled', false);
+            $('#txtDiemDanhGia').prop('disabled', false);
+        }
+
+        function save_ThangDiem(td) {
+            var urlAction = "/ThangDiem/Save_ThangDiem";
+            $.ajax({
+                type: 'POST',
+                url: urlAction,
+                data: JSON.stringify({ ThangDiem: td }),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result == "True") {
+
+                    }
+                    else {
+
+                    }
+
+                    var url = "/ThangDiem/ThongTinThangDiem";
+                    $('#divTongTinBangDiem').load(url);
+                },
+                error: function () {
+                }
+            });
+        }
+
+        function save_CTThangDiem(td_ct) {
+
+            var urlAction = "/ThangDiem/Save_CTThangDiem";
+            $.ajax({
+                type: 'POST',
+                url: urlAction,
+                data: JSON.stringify({ CTThangDiem: td_ct }),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result == "True") {
+
+                    }
+                    else {
+
+                    }
+
+                    var url = '/ThangDiem/ThangDiemChiTiet?id_BD=' + $('#txtId').val();
+                    $('#divChiTiet').load(url);
+
+                },
+                error: function () {
+                }
+            });
+        }
+
+        function Cancel() {
+            debugger;
+            if (btnaction == 0) return;
+            btnaction = 0;
+            var url = '@Url.Action("Index", "ThangDiem")';
+            window.location.href = url;
+        }
+
+        function UpdateCTBD(ID_tc_dg, Tieu_chuan_danh_gia, Diem) {
+            if (btnaction==0) return;
+            $('#txtId_CT').val(ID_tc_dg);
+            $('#txtTieuChuanDanhGia').val(Tieu_chuan_danh_gia);
+            $('#txtDiemDanhGia').val(Diem);
+            $('#btnSave_ChiTiet').html('Save');
+        }
+
+        function UpDateChiTiet() {
+        }
+    </script>
+
+
+}

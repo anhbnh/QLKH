@@ -1,0 +1,54 @@
+﻿@model QuanLyKhoaHoc.Models.khCanBo
+
+@{
+    ViewBag.Title = "Hồ sơ cán bộ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+
+    <div class="row" style=" height:100%;">
+        <div class="col col-lg-3 col-md-3">
+            <div>
+                @{Html.RenderAction("DanhSachDonViQuanLy", "DonViQuanLy");}
+            </div>
+        </div>
+        <div class="col col-lg-9 col-md-9">
+
+            <div class="row" style="margin-bottom:15px; font-size:16px; ">
+                <span style=" font-size: 17px;">Hồ sơ cán bộ</span>
+                <a href="@Url.Action("Create","CanBo")">
+                    <span class="glyphicon" style="font-size:14px; color:green; "><i class="glyphicon glyphicon-plus"></i></span>
+                    <span class="s-text">Thêm cán bộ</span>
+                </a>
+                |
+                <a href="#">
+                    <span class="glyphicon" style="font-size:14px;"><i class="glyphicon glyphicon-export"></i></span>
+                    <span class="s-text">Xuất Excel</span>
+                </a>
+            </div>
+            <div class="row" id="divData">
+                @{
+                    Html.RenderAction("LoadData");
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts
+{
+
+    <script>
+        function LoadData(iddonvi) {
+
+            var url = '/CanBo/LoadData?idDonVi=' + iddonvi;
+            $('#divData').load(url);
+
+        }
+
+    </script>
+
+}

@@ -1,0 +1,339 @@
+﻿@model QuanLyKhoaHoc.Models.khCanBo
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Profile</h2>
+
+<div>
+    <h4>khCanBo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ma_cb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ma_cb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ho_ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ho_ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Link_Anh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Link_Anh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngay_sinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngay_sinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Noi_sinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Noi_sinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_gioi_tinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_gioi_tinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_tt_hn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_tt_hn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_dan_toc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_dan_toc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ton_giao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ton_giao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dien_thoai_NR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dien_thoai_NR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Di_dong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Di_dong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dia_chi_tt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dia_chi_tt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dia_chi_qq)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dia_chi_qq)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Noi_o_hien_nay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Noi_o_hien_nay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.So_CMND)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.So_CMND)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngay_cap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngay_cap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Noi_cap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Noi_cap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Doan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngay_vao_doan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngay_vao_doan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngay_vao_dang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngay_vao_dang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_dv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_dv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_hoc_vi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_hoc_vi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_hoc_ham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_hoc_ham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NamDuocPhongHocHam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamDuocPhongHocHam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NamDatHocVi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamDatHocVi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_chuc_vu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_chuc_vu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_chuyen_mon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_chuyen_mon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dien_thoai_CQ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dien_thoai_CQ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trinh_do_nn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trinh_do_nn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_chuc_danh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_chuc_danh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienThoaiCoQuan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoaiCoQuan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinhVucNghienCuu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinhVucNghienCuu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_chuyen_nganh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_chuyen_nganh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LaSinhVien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LaSinhVien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLop)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_cb }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

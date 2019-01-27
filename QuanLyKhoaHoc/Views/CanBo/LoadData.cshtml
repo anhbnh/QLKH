@@ -1,0 +1,88 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.kh_HoSoCanBo>
+
+
+<div style="width:auto; overflow-x:auto">
+
+    <table class="table table-bordered table-hover" style="width:1900px;">
+        <thead>
+            <tr>
+                <td style="width:100px;">
+                    Mã cán bộ
+                </td>
+                <td style="width:250px;">
+                    Họ và tên
+                </td>
+                <td style="width:120px;">
+                    Ngày sinh
+                </td>
+                <td style="width:70px;">
+                    Giới tính
+                </td>
+                <td style="width:200px;">
+                    Học hàm
+                </td>
+                <td style="width:200px;">
+                    Học vị
+                </td>
+                <td style="width:250px;">
+                    Nơi sinh
+                </td>
+                <td style="width:200px;">
+                    Chức vụ
+                </td>
+                <td style="width:250px;">
+                    Đơn vị
+                </td>
+                <td style="width:250px;">
+                    Chức danh
+                </td>
+
+                <td style="width:150px;">Hành động</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width:100px;">
+                        @item.Ma_cb
+                    </td>
+                    <td style="width:250px;">
+                        @item.Ho_ten
+                    </td>
+                    <td style="width:120px;">
+                        @item.Ngay_sinh.Value.ToString("dd/MM/yyyy")
+                    </td>
+                    <td style="width:70px;">
+                        @item.Gioi_tinh
+                    </td>
+                    <td style="width:200px;">
+                        @item.Hoc_ham
+                    </td>
+                    <td style="width:200px;">
+                        @item.Hoc_vi
+                    </td>
+                    <td style="width:250px;">
+                        @item.Noi_sinh
+                    </td>
+                    <td style="width:200px;">
+                        @item.Chuc_vu
+                    </td>
+                    <td style="width:250px;">
+                        @item.Don_vi
+                    </td>
+                    <td style="width:250px;">
+                        @item.Chuc_danh
+                    </td>
+                    <td width="150">
+
+                        <a href="javascript:void(0)" style="color:blue; margin-right:20px;" data-toggle="tooltip" title='Sửa' onclick="alter('Sửa : '+ @item.Ma_cb)"> <span class="s-icon"><i class="ti-write"></i></span></a>  @*></a>*@
+
+                        <a href="javascript:void(0)" style="color:red" data-toggle="tooltip" title='Xóa' onclick="alter('Xóa : '+ @item.Ma_cb)"><span class=" s-icon"><i class="ti-close"></i></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

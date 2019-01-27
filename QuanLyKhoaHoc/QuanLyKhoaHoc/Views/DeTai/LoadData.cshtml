@@ -1,0 +1,84 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.DeTai>
+
+<div class="panel panel-default" id="divDanhSachDeTai">
+    <div class="panel-heading">
+        <span>DANH SÁCH ĐỀ TÀI/CHUYÊN ĐỀ: <strong>@Model.Count() ĐỀ TÀI/CHUYÊN ĐỀ</strong></span>
+    </div>
+    <div class="panel-body" style="width:auto; overflow-x:auto;height: 350px;">
+
+        <table class="table table-bordered table-hover" style="width:1500px;">
+            <tr>
+                <th width="150">
+                    Mã đề tài
+                </th>
+                <th width="500">
+                    Tên đề tài
+                </th>
+                <th width="200">
+                    Chủ nhiệm
+                </th>
+                <th width="200">
+                    Thư ký
+                </th>
+                <th width="200">
+                    Đơn vị
+                </th>
+                <th width="120">
+                    Từ ngày
+                </th>
+                <th width="120">
+                    Đến ngày
+                </th>
+                <th width="150">
+                    Nguồn vốn
+                </th>
+                <th style="width:150px; text-align:center;">Hành động</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="150">
+                        @Html.DisplayFor(modelItem => item.Ma_de_tai)
+                    </td>
+                    <td width="400">
+                        @Html.DisplayFor(modelItem => item.Ten_de_tai_vn)
+                    </td>
+                    <td width=" 200">
+                        @Html.DisplayFor(modelItem => item.Ten_Can_Bo)
+                    </td>
+                    <td width="200">
+                        @Html.DisplayFor(modelItem => item.Ten_Thu_Ky)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ten_Don_Vi)
+                    </td>
+                    <td width="120">
+                        @* @Html.DisplayFor(modelItem => item.Tu_Ngay.Value.ToString("dd/MM/yyyy"))*@
+                        @if (item.Tu_Ngay != null) { item.Tu_Ngay.Value.ToString("dd/MM/yyyy"); }
+                    </td>
+                    <td width="120">
+                        @if (item.Den_Ngay != null) { item.Tu_Ngay.Value.ToString("dd/MM/yyyy"); }
+                    </td>
+                    <td width="150">
+                        @if (item.Nguon_von != null) { item.Nguon_von.Value.ToString("#,0"); }
+                    </td>
+                    <td width="150" style=" text-align:center;">
+                        <div class="dropdown">
+                            <button class="btn-link dropdown-toggle" type="button" data-toggle="dropdown">
+                                Hành động
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0)" style="color:blue; margin-right:20px;" data-toggle="tooltip" title='Sửa' @*onclick="ShowChiTietHoiDong('@item.ID_hd_chi_tiet','@item.SDT','@item.ID_cb','@item.Ma_cb','@item.Ho_ten','@item.Ten_Don_Vi','@item.Chuc_vu_dv','@item.ID_chuc_vu_hd','@item.Ghi_chu')"*@> <i class="glyphicon glyphicon-pencil"></i>Sửa</a>  @*></a>*@</li>
+                                <li><a href="javascript:void(0)" style="color:red" data-toggle="tooltip" title='Xóa' @*onclick="alter('Xóa : '+ @item.ID_hd_chi_tiet)"*@><i class="glyphicon glyphicon-remove"></i>Xóa</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+</div>

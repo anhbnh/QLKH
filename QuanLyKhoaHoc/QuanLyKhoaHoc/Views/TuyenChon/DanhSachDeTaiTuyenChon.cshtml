@@ -1,0 +1,62 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.DeTai_TuyenChon>
+<div class="panel panel-default" id="divDanhSachDeTaiXetDuyet">
+    <div class="panel-heading">
+        <span>DANH SÁCH ĐỀ TÀI/CHUYÊN ĐỀ: <strong>@Model.Count() ĐỀ TÀI/CHUYÊN ĐỀ</strong></span>
+    </div>
+    <div class="panel-body" style="width:auto; overflow-x:auto;height: 450px;">
+
+        <table class="table table-bordered table-hover" style="width:1100px;">
+            <tr>
+                <th width="150">
+                    Mã đề tài
+                </th>
+                <th width="380">
+                    Tên đề tài
+                </th>
+                <th width="120">
+                    Ngày xét
+                </th>
+                <th width="150">
+                    Chủ nhiệm đề tài
+                </th>
+                <th width="150">
+                    Chức vụ
+                </th>
+                <th width="150">
+                    Đơn vị
+                </th>
+                <th width="100">
+                    Thông tin bổ xung
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="150">
+                        @Html.DisplayFor(modelItem => item.Ma_de_tai)
+                    </td>
+                    <td width="380">
+                        @Html.DisplayFor(modelItem => item.Ten_de_tai_vn)
+                    </td>
+                    <td width="120">
+                        @Html.DisplayFor(modelItem => item.Ngay_Xet)
+                    </td>
+                    <td width="150">
+                        @Html.DisplayFor(modelItem => item.Ten_Can_Bo)
+                    </td>
+                    <td width="150">
+                        @Html.DisplayFor(modelItem => item.Chuc_Vu)
+                    </td>
+                    <td width="150">
+                        @Html.DisplayFor(modelItem => item.Ten_Don_Vi)
+                    </td>
+                    <td width="100">
+                        <a href="@Url.Action("ThongTinBoXungDeTai", "TuyenChon", new { id_detai = @item.ID_de_tai})" style="color:green" data-toggle="tooltip" title='Chi tiết đề tài'><i class="glyphicon glyphicon-pencil"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

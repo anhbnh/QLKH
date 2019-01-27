@@ -1,0 +1,516 @@
+﻿@model QuanLyKhoaHoc.Models.khCanBo
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Hồ sơ cán bộ</h2>
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Mã cán bộ:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Ma_cb, new { htmlAttributes = new { @class = "form-control", @id = "txtMaCanBo" } })
+                        @Html.ValidationMessageFor(model => model.Ma_cb, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Họ tên:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Ho_ten, new { htmlAttributes = new { @class = "form-control", @id = "txtTenCanbo", @placeholder = "Họ tên" } })
+                        @Html.ValidationMessageFor(model => model.Ho_ten, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Ngày sinh:</span>
+                    <div class="col-md-8">
+                        <input type="date" id="txtNgaySinh" class="datepicker form-control" />
+                        @Html.ValidationMessageFor(model => model.Ngay_sinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Nơi sinh:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Noi_sinh, new { htmlAttributes = new { @class = "form-control", @id = "txtNoiSinh", @placeholder = "Nơi sinh" } })
+                        @Html.ValidationMessageFor(model => model.Noi_sinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Giới tính:</span>
+                    <div class="col-md-8">
+                        <label class="radio-inline"><input type="radio" name="txtGioiTinh" id="txtGioiTinh" checked>Nam</label>
+                        <label class="radio-inline"><input type="radio" name="txtGioiTinh" id="txtGioiTinh">Nữ</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Hôn nhân:</span>
+                    <div class="col-md-8">
+                        <label class="radio-inline"><input type="radio" name="txtGiaDinh" id="txtGiaDinh">Có gia đình</label>
+                        <label class="radio-inline"><input type="radio" name="txtGiaDinh" id="txtGiaDinh" checked>Chưa có gia đình</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Dân tộc:</span>
+                    <div class="col-md-8">
+                        @{
+                            Html.RenderAction("SelectDanToc", "DanToc");
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Tôn giáo:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Ton_giao, new { htmlAttributes = new { @class = "form-control", @id = "txtTonGiao" } })
+                        @Html.ValidationMessageFor(model => model.Ton_giao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">SĐT nhà riêng :</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Dien_thoai_NR, new { htmlAttributes = new { @class = "form-control", @id = "txtDienTHoaiNR", @placeholder = "Điện thoại nhà riêng" } })
+                        @Html.ValidationMessageFor(model => model.Dien_thoai_NR, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Di động :</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Di_dong, new { htmlAttributes = new { @class = "form-control", @id = "txtDienThoaiDD", @placeholder = "Điện thoại di động" } })
+                        @Html.ValidationMessageFor(model => model.Di_dong, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Email:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "txtEmail", @placeholder = "quanlykhoahoc@email.com" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Địa chỉ thường trú:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Dia_chi_tt, new { htmlAttributes = new { @class = "form-control", @id = "txtDiaChitt", @placeholder = "Địa chỉ thường trú" } })
+                        @Html.ValidationMessageFor(model => model.Dia_chi_tt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Cơ quan:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Dia_chi_qq, new { htmlAttributes = new { @class = "form-control", @id = "txtDiaChiCQ", @placeholder = "Địa chỉ Cơ quan" } })
+                        @Html.ValidationMessageFor(model => model.Dia_chi_qq, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Địa chỉ:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Noi_o_hien_nay, new { htmlAttributes = new { @class = "form-control", @id = "txtDiaChiHN", @placeholder = "Nơi ở hiên nay" } })
+                        @Html.ValidationMessageFor(model => model.Noi_o_hien_nay, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">CMTND:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.So_CMND, new { htmlAttributes = new { @class = "form-control", @id = "txtCMTND", @placeholder = "Chưng minh thư nhân dân" } })
+                        @Html.ValidationMessageFor(model => model.So_CMND, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Ngày vào Đoàn:</span>
+                    <div class="col-md-8">
+                        <input class="datepicker" type="date" id="txtNgayVaoDoan" />
+                        <input type="checkbox" id="cbDoanVien" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Nơi cấp:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Noi_cap, new { htmlAttributes = new { @class = "form-control", @id = "txtNoiCap", @placeholder = "Nơi cấp" } })
+                        @Html.ValidationMessageFor(model => model.Noi_cap, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Ngày vào Đảng:</span>
+                    <div class="col-md-8">
+                        <input class="datepicker" type="date" id="txtNgayVaoDang" />
+                        <input type="checkbox" id="cbDangVien" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Ngày cấp</span>
+                    <div class="col-md-8">
+                        <input class="datepicker form-control" type="date" id="txtNgayCap" />
+                        @Html.ValidationMessageFor(model => model.Ngay_cap, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <div class="col-md-4" style=" text-align:right;">
+                        <label class="checkbox-inline"><input type="checkbox" name="cbSinhVien" id="cbSinhVien" value="">Là sinh viên:</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.TenLop, new { htmlAttributes = new { @class = "form-control", @id = "txtTenLop", @placeholder = "Tên lớp" } })
+                        @Html.ValidationMessageFor(model => model.TenLop, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Học hàm</span>
+                    <div class="col-md-8">
+                        @{
+                            Html.RenderAction("SelectHocHam", "HocHam");
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-5">Năm phong học hàm</span>
+                    <div class="col-md-7">
+                        <input type="number" class="form-control" value="@DateTime.Now.Year" id="txtNamHocHam" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Học vị</span>
+                    <div class="col-md-8">
+                        @{
+                            Html.RenderAction("SelectHocVi", "HocVi");
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-5">Năm phong học vị</span>
+                    <div class="col-md-7">
+                        <input type="number" class="form-control" value="@DateTime.Now.Year" id="txtNamHocVi" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Đơn vị:</span>
+                    <div class="col-md-8">
+                        @{
+                            Html.RenderAction("SelectDonViQuanLy", "DonViQuanLy");
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Chức vụ:</span>
+                    <div class="col-md-8">
+                        @{
+                            Html.RenderAction("SelectChucVuDonVi", "ChucVuDonVi");
+                        }
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Chức danh:</span>
+                    <div class="col-md-8">
+                        @{
+                            Html.RenderAction("SelectChucDanh", "ChucDanh");
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">SĐT cơ quan:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Dien_thoai_CQ, new { htmlAttributes = new { @class = "form-control", @id = "txtSDTCoQuan", @placeholder = "Số điện thoại cơ quan" } })
+                        @Html.ValidationMessageFor(model => model.Dien_thoai_CQ, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Fax:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control", @id = "txtFax", @placeholder = "Fax ..." } })
+                        @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Ngoại ngữ:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Trinh_do_nn, new { htmlAttributes = new { @class = "form-control", @id = "txtNgoaiNgu", @placeholder = "Trình độ ngoại ngữ" } })
+                        @Html.ValidationMessageFor(model => model.Trinh_do_nn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Chuyên môn:</span>
+                    <div class="col-md-8">
+                        @{
+                            Html.RenderAction("SelectChuyenMon", "ChuyenMon");
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Chuyên ngành:</span>
+                    <div class="col-md-8">
+                        @{
+                            Html.RenderAction("SelectChuyenNganh", "ChuyenNganhDaoTao");
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <span class="control-label col-md-4">Lĩnh vực:</span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.LinhVucNghienCuu, new { htmlAttributes = new { @class = "form-control", @id = "txtLinhVuc", @placeholder = "Lĩnh vực nghiên cứu" } })
+                        @Html.ValidationMessageFor(model => model.LinhVucNghienCuu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="col-lg-2">
+            <div class="row">
+                <img class="img-responsive" id="imgAvarta" name="imgAvarta" src="~/img/avata.jpg" width="150" height="200" />
+            </div>
+            <div class="row">
+                <input type="file" id="fileAvarta" name="fileAvarta" placeholder="ảnh đại diện" multiple />
+            </div>
+            <div class="row"><button class="btn-default" id="btnUpload">Upload</button></div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <div class="col-md-offset-2 col-md-10">
+                <button id="btnLuu" class="btn btn-primary">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts{
+    <script>
+
+        $('#btnUpload').click(function () {
+            debugger;
+            //var formdata = new FormData(); //FormData object
+            //var fileInput = document.getElementById('fileAvarta');
+            //var dtnow = new Date($.now());
+            //alert(dtnow.toUTCString());
+            //return;
+            //for (i = 0; i < fileInput.files.length; i++) {
+            //    formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            //}
+
+            //var xhr = new XMLHttpRequest();
+            //xhr.open('POST', '/CanBo/Upload');
+            //xhr.send(formdata);
+            //xhr.onreadystatechange = function () {
+            //    debugger;
+            //    if (xhr.readyState == 4 && xhr.status == 200) {
+            //        alert(xhr.responseText);
+            //    }
+            //}
+            // var link = $('#fileAvarta').val();
+            //  alert(link);
+            var url = '@Url.Action("Index", "CanBo")';
+            window.location.href = url;
+        });
+
+        function uploadFile() {
+            debugger
+            var formdata = new FormData(); //FormData object
+
+            var dtnow = new Date($.now());
+            var strnow = dtnow.toString().replace(' ', '');
+            for (i = 0; i < fileInput.files.length; i++) {
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/CanBo/Upload');
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                debugger;
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    alert(xhr.responseText);
+                }
+            }
+        }
+
+        function readURL(input) {
+            debugger;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgAvarta').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#fileAvarta").change(function () {
+            debugger;
+            readURL(this);
+        });
+
+
+        $('#btnLuu').click(function () {
+            debugger;
+            var cb = {};
+            cb.ID_cb = -1;
+            cb.Ma_cb = $('#txtMaCanBo').val();
+            cb.Ho_ten = $('#txtTenCanbo').val();
+            cb.Link_Anh = "Avatars/avata.jpg";
+            cb.Ngay_sinh = $('#txtNgaySinh').val();
+            cb.Noi_sinh = $('#txtNoiSinh').val();
+            cb.ID_gioi_tinh = $('input:radio[name=txtGioiTinh]')[0].checked;
+            cb.ID_tt_hn = $('input:radio[name=txtGiaDinh]')[0].checked;
+            cb.ID_dan_toc = $('#SelectDanToc').val();
+            cb.Ton_giao = $('#txtTonGiao').val();
+            cb.Dien_thoai_NR = $('#txtDienTHoaiNR').val();
+            cb.Di_dong = $('#txtDienThoaiDD').val();
+            cb.Email = $('#txtEmail').val();
+            cb.Dia_chi_tt = $('#txtDiaChitt').val();
+            cb.Dia_chi_qq = $('#txtDiaChiCQ').val();
+            cb.Noi_o_hien_nay = $('#txtDiaChiHN').val();
+            cb.So_CMND = $('#txtCMTND').val();
+            cb.Ngay_cap = $('#txtNgayCap').val();
+            cb.Noi_cap = $('#txtNoiCap').val();
+            cb.Doan = $('#cbDoanVien').is(":checked");
+            cb.Ngay_vao_doan = $('#cbDoanVien').is(":checked") ? $('#txtNgayVaoDoan').val() : null;
+            cb.Dang = $('#cbDangVien').is(":checked");
+            cb.Ngay_vao_dang = $('#cbDangVien').is(":checked") ? $('#txtNgayVaoDang').val() : null;
+            cb.ID_dv = $('#SelectDonViQuanLy').val();
+            cb.ID_hoc_vi = $('#SelectHocVi').val();
+            cb.ID_hoc_ham = $('#SelectHocHam option:selected').val();
+            cb.NamDuocPhongHocHam = $('#txtNamHocHam').val();
+            cb.NamDatHocVi = $('#txtNamHocVi').val();
+            cb.ID_chuc_vu = $('#SelectChucVuDonVi option:selected').val();
+            cb.ID_chuyen_mon = $('#SelectChuyenMon option:selected').val();
+            cb.Dien_thoai_CQ = $('#txtSDTCoQuan').val();
+            cb.Fax = $('#txtFax').val();
+            cb.Trinh_do_nn = $('#txtFax').val();
+            cb.ID_chuc_danh = $('#SelectChucDanh option:selected').val();
+            cb.LinhVucNghienCuu = $('#txtLinhVuc').val();
+            cb.ID_chuyen_nganh = $('#SelectChuyenNganh option:selected').val();
+            cb.LaSinhVien = $('#cbSinhVien').is(":checked");
+            cb.TenLop = $('#txtTenLop').val();
+
+            var link = $('#fileAvarta').val();
+            if (link != null && link != "") {
+                // upload avatar
+                var formdata = new FormData(); //FormData object
+                var fileInput = document.getElementById('fileAvarta');
+                for (i = 0; i < fileInput.files.length; i++) {
+                    formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/CanBo/Upload');
+                xhr.send(formdata);
+                xhr.onreadystatechange = function () {
+                    debugger;
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        cb.Link_Anh = xhr.responseText;
+                        save(cb);
+                    }
+                    else {
+                        //  save(cb);
+                    }
+                }
+            }
+            else
+                save(cb);
+            // endupload
+        });
+
+        function save(cb) {
+            var urlAction = "/CanBo/Save";
+            $.ajax({
+                type: 'POST',
+                url: urlAction,
+                data: JSON.stringify({ canbo: cb }),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result == "True") {
+
+                    }
+                    else {
+
+                    }
+                    var url = '@Url.Action("Index", "CanBo")';
+                    window.location.href = url;
+                },
+                error: function () {
+                }
+            });
+        }
+    </script>
+
+}

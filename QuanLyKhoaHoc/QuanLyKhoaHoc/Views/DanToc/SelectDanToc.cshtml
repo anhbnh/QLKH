@@ -1,0 +1,10 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.dmDanToc>
+
+
+<select id="SelectDanToc" name="SelectDanToc" class="form-control">
+    <option value="-1">Chọn</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.ID_dan_toc"> @item.Dan_toc </option>
+    }
+</select>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.dmDonViQuanLy>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Mã đơn vị
+        </th>
+        <th>
+            Tên đơn vị
+        </th>
+        <th>
+            Tên tiếng anh
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        <th>
+            Điện thoại
+        </th>
+        <th>
+            Hòm thư
+        </th>
+        <th>
+            Ghi chú
+        </th>
+        
+        <th width="150" style="text-align:center">Hành động</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ma_dv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ten_dv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ten_dv_en)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dia_chi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dien_thoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hom_thu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ghi_chu)
+        </td>
+       
+        <td width="150" style="text-align:center;">
+
+            <a href="javascript:void(0)" style="color:blue; margin-right:20px;" data-toggle="tooltip" title='Sửa' onclick="alter('Sửa')"> <i class="glyphicon glyphicon-pencil"></i></a>  @*></a>*@
+
+            <a href="javascript:void(0)" style="color:red" data-toggle="tooltip" title='Xóa' onclick="alter('Xóa')"><i class="glyphicon glyphicon-remove"></i></a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.dmLinhVucDeTai>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Mã lĩnh vực đề tài
+        </th>
+        <th>
+            Lĩnh vực đề tài
+        </th>
+        <th width="150" style="text-align:center">Hành động</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ma_linh_vuc_de_tai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Linh_vuc_de_tai)
+        </td>
+        <td width="150" style="text-align:center;">
+
+            <a href="javascript:void(0)" style="color:blue; margin-right:20px;" data-toggle="tooltip" title='Sửa' onclick="alter('Sửa')"> <i class="glyphicon glyphicon-pencil"></i></a>  @*></a>*@
+
+            <a href="javascript:void(0)" style="color:red" data-toggle="tooltip" title='Xóa' onclick="alter('Xóa')"><i class="glyphicon glyphicon-remove"></i></a>
+        </td>
+    </tr>
+}
+
+</table>

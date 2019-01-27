@@ -1,0 +1,93 @@
+﻿<ul class="sidebar-menu">
+    <li class="header">Quản lý khoa học</li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-folder"></i>
+            <span>Đề tài, Chuyên đề</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="@Url.Action("Index","ThangDiem")"><i class="fa fa-circle-o"></i> Thang điểm đánh giá</a></li>
+            <li><a href="@Url.Action("Index","ThanhLapHoiDong")"><i class="fa fa-circle-o"></i> Hội đồng khoa học</a></li>
+            <li><a href="@Url.Action("Index","DeTai")"><i class="fa fa-circle-o"></i> Danh sách đề tài, chuyên đề</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Nghiệm thu chính thức</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý tổng kinh phí</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý kinh phí theo đề tài</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="#">
+            <i class="fa fa-th"></i> <span>Hội thảo khoa học</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="#">
+            <i class="fa fa-th"></i> <span>Chương trình đào tạo</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="@Url.Action("Index","CanBo")">
+            <i class="fa fa-user"></i> <span>Hồ sơ- lý lịch khoa học</span>
+        </a>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-search"></i>
+            <span>Tìm kiếm - thống kê</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Tìm kiếm </a></li>
+            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Thống kê</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-list"></i>
+            <span>Danh mục</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="#">Ngành đào tạo</a></li>
+            <li><a href="@Url.Action("Index","ChuyenNganhDaoTao")"><i class="fa fa-circle-o"></i>Chuyên ngành đào tạo</a></li>
+            <li><a href="@Url.Action("Index","Khoa")"><i class="fa fa-circle-o"></i>Khoa</a></li>
+            <li><a href="@Url.Action("Index","ChuyenMon")"><i class="fa fa-circle-o"></i>Chuyên môn</a></li>
+            <li><a href="@Url.Action("Index","ChucVuHoiDong")"><i class="fa fa-circle-o"></i>Chức vụ hội đồng</a></li>
+            <li><a href="@Url.Action("Index","LoaiHoiDong")"><i class="fa fa-circle-o"></i>Loại hội đồng</a></li>
+            <li><a href="@Url.Action("Index","DonViQuanLy")"><i class="fa fa-circle-o"></i>Đơn vị quản lý</a></li>
+            <li><a href="@Url.Action("Index","ChucVuDonVi")"><i class="fa fa-circle-o"></i>Chức vụ đơn vị</a></li>
+            <li><a href="@Url.Action("Index","LoaiDuToan")"><i class="fa fa-circle-o"></i>Loại dự toán</a></li>
+            <li><a href="@Url.Action("Index","LoaiHinhNghienCuu")"><i class="fa fa-circle-o"></i>Loại hình nghiên cứu</a></li>
+            <li><a href="@Url.Action("Index","LinhVucNghienCuu")"><i class="fa fa-circle-o"></i>Lĩnh vực nghiên cứu</a></li> @*Lĩnh vực khoa học*@
+            <li><a href="@Url.Action("Index","KetQuaDeTai")"><i class="fa fa-circle-o"></i>Lĩnh vực đề tài</a></li> @*dmXepLoai*@
+            <li><a href="@Url.Action("Index","YeuCauKhoaHoc")"><i class="fa fa-circle-o"></i>Yêu cầu khoa học</a></li>
+            <li><a href="@Url.Action("Index","TinhTrangDeTai")"><i class="fa fa-circle-o"></i>TÌnh trạng đề tài</a></li>
+            <li><a href="@Url.Action("Index","ChucDanhKhoaHoc")"><i class="fa fa-circle-o"></i>Chức danh khoa học</a></li>
+            <li><a href="@Url.Action("Index","CapQuanLy")"><i class="fa fa-circle-o"></i>Cấp quản lý</a></li>
+            <li><a href="@Url.Action("Index","LoaiDeTai")"><i class="fa fa-circle-o"></i>Loại đề tài</a></li>
+            <li><a href="@Url.Action("Index","DonViPhoiHop")"><i class="fa fa-circle-o"></i>Đơn vị phối hợp</a></li>
+            <li><a href="@Url.Action("Index","CoQuanChuQuan")"><i class="fa fa-circle-o"></i>Cơ quan chủ quản</a></li>
+            <li><a href="@Url.Action("Index","DonViChuTri")"><i class="fa fa-circle-o"></i>Đơn vị chủ trì</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Cơ quan cấp kinh phí</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Khu vực nghiên cứu</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Loại kế hoạch</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Cấp hội thảo</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Khóa học</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Danh mục sản phẩm</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Danh mục giá sản phẩm</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Danh mục bậc đào tạo</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Damh mục loại chi</a></li>
+        </ul>
+    </li>
+</ul>

@@ -1,0 +1,51 @@
+﻿@model QuanLyKhoaHoc.Models.khThanhLapHoiDong
+
+
+<div class="row">
+    <input type="hidden" id="txtId" value="-1"/>
+    <div class="col-md-2">
+        <span class="control-label">Số quyết định:</span>
+    </div>
+    <div class="col-md-2">
+        <input type="text" class="form-control" id="txtSoQuyetDinh" placeholder="Số QD" />
+    </div>
+    <div class="col-md-1">
+        <span class="control-label">Ngày:</span>
+    </div>
+    <div class=" col-md-3">
+        <input type="date" class="form-control" id="txtNgay" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="col-md-1">
+        <span class="control-label">Năm:</span>
+    </div>
+    <div class="col-md-3">
+        <input type="number" class="form-control" id="txtNam" value="@DateTime.Now.Year" min="1990" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <span class="control-label">Cấp hội đồng:</span>
+    </div>
+    <div class="col-md-6">
+        @{Html.RenderAction("SelectCapHoiDong", "CapHoiDong");}
+    </div>
+</div>
+
+<div class=" row">
+    <div class="col-md-2">
+        <span class="control-label">Loại hội đồng:</span>
+    </div>
+    <div class="col-md-6">
+        @{Html.RenderAction("SelectLoaiHoiDong", "LoaiHoiDong");}
+    </div>
+</div>
+
+<div class=" row">
+    <div class="col-md-2">
+        <span class="control-label">Tên hội đồng:</span>
+    </div>
+    <div class="col-md-10">
+        <input type="text" class="form-control" id="txtTenHoiDong" placeholder="Tên hội đồng" />
+    </div>
+</div>

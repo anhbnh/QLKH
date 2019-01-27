@@ -1,0 +1,20 @@
+﻿@model IEnumerable<QuanLyKhoaHoc.Models.dmDonViQuanLy>
+
+
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+        Danh sách đơn vị quản lý
+    </a>
+    <div style="height:450px; overflow-y:auto;">
+        @*height:500px; overflow-y:auto;*@
+        @foreach (var item in Model)
+        {
+            <a href="#" onclick="return LoadData('@item.ID_dv')" class="list-group-item list-group-item-action">
+                <i class="ti-arrow-circle-right"></i>
+                @item.Ten_dv
+            </a>
+        }
+    </div>
+
+</div>
+
